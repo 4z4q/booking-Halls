@@ -1,10 +1,10 @@
 // القائمة الرئيسية
 export const NAV_LINKS = [
   { href: '/', key: 'home', label: 'الصفحة الرئيسية' },
-  { href: '/', key: 'how_hilink_work', label: 'كيف يعمل موقعنا' },
+  { href: '/', key: 'about', label: 'حول' },
   { href: '/', key: 'services', label: 'الخدمات' },
-  { href: '/', key: 'pricing', label: 'التسعير' },
-  { href: '/', key: 'contact_us', label: 'اتصل بنا' },
+  { href: '/', key: 'support', label: 'الدعم' },
+  { href: '/', key: 'contact_us', label: 'تواصل معنا' },
 ];
 
 // قسم المعسكر

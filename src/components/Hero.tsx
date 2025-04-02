@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Home() {
@@ -125,25 +126,30 @@ export default function Home() {
               {
                 title: "قاعات المناسبات",
                 category: "قاعات",
+                href: "/fetuers/halls",
                 image: "/pexels-bertellifotografia-17023018.jpg",
               },
               {
                 title: "فنانين الزفاف",
                 category: "فنانين",
+                href: "/fetuers/artists",
                 image: "/pexels-suvan-chowdhury-37305-144429.jpg",
               },
               {
                 title: "مصور العرس",
                 category: "مصور",
+                href: "/fetuers/photography",
                 image: "/pexels-kawerodriguess-16313529.jpg",
               },
               {
                 title: "ملابس العرس",
                 category: "ملابس",
+                href: "/fetuers/clothing",
                 image: "/pexels-aftabmirza-25293843.jpg",
               },
             ].map((item, index) => (
-              <div
+              <Link
+                href={item.href}
                 key={index}
                 className="group overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md"
               >
@@ -167,7 +173,7 @@ export default function Home() {
                     لا تضيع وقتك في البحث، نحن نجمع لك أفضل العروض في مكان واحد
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>

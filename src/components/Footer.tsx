@@ -5,11 +5,11 @@ const Footer = () => {
   return (
     <footer className="border-t bg-background">
       <div className="container pb-0 pt-8 md:pt-12">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 grid-cols-2 md:grid-cols-4  lg:grid-cols-4">
           {/* Column 1: About */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="relative h-8 w-8">
+              <div className="sm:relative sm:block sm:h-8 sm:w-8 hidden">
                 <div className="absolute h-8 w-8 rounded-full bg-purple-600"></div>
                 <div className="absolute h-6 w-6 translate-x-1 translate-y-1 rounded-full bg-blue-500"></div>
               </div>

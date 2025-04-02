@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="ar" dir="rtl">
       <body className={IBM.className}>
         <Navbar />
-        <div className="container py-6">
+        <div className="container py-6 ">
           <main className="relative overflow-hidden">{children}</main>
           <Footer />
         </div>

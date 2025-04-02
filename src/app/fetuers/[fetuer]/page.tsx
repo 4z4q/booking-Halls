@@ -47,7 +47,7 @@ export default async function HallsPage({
   const allowedCategories = [
     "halls",
     "decor",
-    "clothing ",
+    "clothing",
     "artists",
     "photography",
   ];

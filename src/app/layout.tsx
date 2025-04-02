@@ -1,31 +1,31 @@
-import type React from "react";
-import "@/app/globals.css";
-import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from "next";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata = {
-  title: "شبكة الرعد",
-  description: "واجهة تسجيل الدخول للشبكة باللغة العربية",
+const IBM = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+});
+export const metadata: Metadata = {
+  title: "MG | عرسك علينا",
+  description: "اي شي",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
-      <head />
-      <body className={`${inter.className} dark:bg-slate-900`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-        >
-          {children}
-        </ThemeProvider>
+    <html lang="ar" dir="rtl">
+      <body className={IBM.className}>
+        <Navbar />
+        <div className="container py-6">
+          <main className="relative overflow-hidden">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

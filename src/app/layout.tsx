@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 
 const IBM = IBM_Plex_Sans_Arabic({
@@ -21,11 +19,7 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body className={IBM.className}>
-        <Navbar />
-        <div className="container py-6 ">
-          <main className="relative overflow-hidden">{children}</main>
-          <Footer />
-        </div>
+        {children}
       </body>
     </html>
   );

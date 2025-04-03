@@ -81,39 +81,39 @@ export default async function HallsPage({
         <div className="mb-8 grid gap-6 md:grid-cols-[280px_1fr]">
           {/* Mobile Filter Button */}
           <div className="md:hidden">
-            <Sheet>
+            <Sheet >
               <SheetTrigger asChild>
                 <Button variant="outline" className="w-full">
                   <SlidersHorizontal className="mr-2 h-4 w-4" />
-                  Filters
+                  تصفية البحث
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left">
-                <SheetHeader>
-                  <SheetTitle>Filter Halls</SheetTitle>
+              <SheetContent side="right">
+                <SheetHeader className="pb-0 mt-4">
+                  <SheetTitle>تصفية القاعات</SheetTitle>
                   <SheetDescription>
-                    Refine your search to find the perfect venue for your event.
+                    قم بتحديد خيارات البحث للعثور على القاعة المثالية لمناسبتك.
                   </SheetDescription>
                 </SheetHeader>
-                <div className="mt-6 space-y-6">
-                  {/* Mobile Filters */}
+                <div className="mt-6 space-y-6 px-4">
+                  {/* فلاتر البحث للجوال */}
                   <div className="space-y-4">
-                    <h3 className="font-medium"></h3>
+                    <h3 className="font-medium">الموقع</h3>
                     <div className="space-y-2">
                       {[
-                        "Downtown",
-                        "Business District",
-                        "Riverside",
-                        "Financial District",
-                        "City Center",
-                        "Tech Park",
+                        "وسط المدينة",
+                        "الحي التجاري",
+                        "ضفاف النهر",
+                        "المنطقة المالية",
+                        "مركز المدينة",
+                        "مدينة التكنولوجيا",
                       ].map((location) => (
                         <div
                           key={location}
                           className="flex items-center space-x-2"
                         >
                           <Checkbox id={`location-mobile-${location}`} />
-                          <Label htmlFor={`location-mobile-${location}`}>
+                          <Label className="pr-[5px]" htmlFor={`location-mobile-${location}`}>
                             {location}
                           </Label>
                         </div>
@@ -122,27 +122,27 @@ export default async function HallsPage({
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="font-medium">Price Range</h3>
+                    <h3 className="font-medium">نطاق الأسعار</h3>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-muted-foreground">
-                          $0
+                          0 ريال
                         </span>
                         <span className="text-sm text-muted-foreground">
-                          $2000
+                          2000 ريال
                         </span>
                       </div>
                       <Slider defaultValue={[0, 2000]} max={2000} step={100} />
                       <div className="flex items-center space-x-2">
                         <Input
                           type="number"
-                          placeholder="Min"
+                          placeholder="الحد الأدنى"
                           className="h-8"
                         />
                         <span className="text-muted-foreground">-</span>
                         <Input
                           type="number"
-                          placeholder="Max"
+                          placeholder="الحد الأعلى"
                           className="h-8"
                         />
                       </div>
@@ -150,38 +150,38 @@ export default async function HallsPage({
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="font-medium">Capacity</h3>
+                    <h3 className="font-medium">سعة القاعة</h3>
                     <Select>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select capacity" />
+                        <SelectValue placeholder="اختر السعة" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="50">Up to 50 people</SelectItem>
-                        <SelectItem value="100">Up to 100 people</SelectItem>
-                        <SelectItem value="200">Up to 200 people</SelectItem>
-                        <SelectItem value="500">Up to 500 people</SelectItem>
-                        <SelectItem value="1000">500+ people</SelectItem>
+                        <SelectItem value="50">حتى 50 شخصًا</SelectItem>
+                        <SelectItem value="100">حتى 100 شخص</SelectItem>
+                        <SelectItem value="200">حتى 200 شخص</SelectItem>
+                        <SelectItem value="500">حتى 500 شخص</SelectItem>
+                        <SelectItem value="1000">أكثر من 500 شخص</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="font-medium">Amenities</h3>
+                    <h3 className="font-medium">المرافق</h3>
                     <div className="space-y-2">
                       {[
-                        "WiFi",
-                        "Catering",
-                        "Sound System",
-                        "Projector",
-                        "Parking",
-                        "Bar Service",
+                        "إنترنت مجاني",
+                        "بوفيه مفتوح",
+                        "نظام صوتي",
+                        "جهاز عرض (بروجيكتور)",
+                        "مواقف سيارات",
+                        "خدمة الضيافة",
                       ].map((amenity) => (
                         <div
                           key={amenity}
                           className="flex items-center space-x-2"
                         >
                           <Checkbox id={`amenity-mobile-${amenity}`} />
-                          <Label htmlFor={`amenity-mobile-${amenity}`}>
+                          <Label className="pr-[5px]" htmlFor={`amenity-mobile-${amenity}`}>
                             {amenity}
                           </Label>
                         </div>
@@ -190,7 +190,7 @@ export default async function HallsPage({
                   </div>
 
                   <div className="pt-4">
-                    <Button className="w-full">Apply Filters</Button>
+                    <Button className="w-full">تطبيق الفلاتر</Button>
                   </div>
                 </div>
               </SheetContent>

@@ -11,7 +11,7 @@ export default function RootLayout({
     <>
       <Navbar />
       <div className="container py-6 ">
-        <main className="relative overflow-hidden">{children}</main>
+        <main className="relative overflow-hidden shadow-xl bg-white">{children}</main>
         <Footer />
       </div>
     </>

@@ -184,12 +184,18 @@ export const halls = [
   },
 ];
 
-
 export const services = [
-    ...halls.map((hall) => ({ ...hall, type: "halls" })),
-    ...decor.map((item) => ({ ...item, type: "decor" })),
-    ...artists.map((artist) => ({ ...artist, type: "artists" })),
-    ...clothing.map((cloth) => ({ ...cloth, type: "clothing" })),
-    ...photography.map((photo) => ({ ...photo, type: "photography" })),
-  ];
-  
+  ...halls.map((hall) => ({ ...hall, type: "halls" })),
+  ...decor.map((item) => ({ ...item, type: "decor" })),
+  ...artists.map((artist) => ({ ...artist, type: "artists" })),
+  ...clothing.map((cloth) => ({ ...cloth, type: "clothing" })),
+  ...photography.map((photo) => ({ ...photo, type: "photography" })),
+];
+
+export const allowedCategories = [
+  { category: "halls", id: 1 },
+  { category: "decor", id: 2 },
+  { category: "clothing", id: 3 },
+  { category: "artists", id: 4 },
+  { category: "photography", id: 5 },
+];

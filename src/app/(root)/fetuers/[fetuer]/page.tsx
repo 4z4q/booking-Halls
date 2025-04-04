@@ -38,22 +38,18 @@ import {
 } from "@/components/ui/sheet";
 import { services } from "@/constants/servises";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 export default async function HallsPage({
   params,
 }: {
   params: { fetuer: string };
 }) {
-  const allowedCategories = [
-    "halls",
-    "decor",
-    "clothing",
-    "artists",
-    "photography",
-  ];
-
   const { fetuer } = await params;
-  if (!allowedCategories.includes(fetuer)) {
+
+  const found = services.find((service) => service.type === fetuer);
+
+  if (!found) {
     notFound();
   }
 
@@ -62,7 +58,6 @@ export default async function HallsPage({
   const filteredPage = services.filter((service) => {
     return service.type === fetuer;
   });
-
 
   return (
     <div className="min-h-screen bg-background">
@@ -80,14 +75,17 @@ export default async function HallsPage({
         <div className="mb-8 grid gap-6 md:grid-cols-[280px_1fr]">
           {/* Mobile Filter Button */}
           <div className="md:hidden">
-            <Sheet >
+            <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" className="w-full">
                   <SlidersHorizontal className="mr-2 h-4 w-4" />
                   تصفية البحث
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className=" max-h-screen overflow-y-auto">
+              <SheetContent
+                side="right"
+                className=" max-h-screen overflow-y-auto"
+              >
                 <SheetHeader className="pb-0 mt-4">
                   <SheetTitle>تصفية القاعات</SheetTitle>
                   <SheetDescription>
@@ -112,7 +110,10 @@ export default async function HallsPage({
                           className="flex items-center space-x-2"
                         >
                           <Checkbox id={`location-mobile-${location}`} />
-                          <Label className="pr-[5px]" htmlFor={`location-mobile-${location}`}>
+                          <Label
+                            className="pr-[5px]"
+                            htmlFor={`location-mobile-${location}`}
+                          >
                             {location}
                           </Label>
                         </div>
@@ -180,7 +181,10 @@ export default async function HallsPage({
                           className="flex items-center space-x-2"
                         >
                           <Checkbox id={`amenity-mobile-${amenity}`} />
-                          <Label className="pr-[5px]" htmlFor={`amenity-mobile-${amenity}`}>
+                          <Label
+                            className="pr-[5px]"
+                            htmlFor={`amenity-mobile-${amenity}`}
+                          >
                             {amenity}
                           </Label>
                         </div>
@@ -315,89 +319,91 @@ export default async function HallsPage({
 
             <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
               {filteredPage.map((hall) => (
-                <Card key={hall.id} className="overflow-hidden">
-                  <div className="aspect-video w-full overflow-hidden">
-                    <Image
-                      src={hall.image || "/placeholder.svg"}
-                      alt={hall.name}
-                      width={500}
-                      height={300}
-                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle>{hall.name}</CardTitle>
-                        <CardDescription className="flex items-center mt-1">
-                          {fetuer.toLowerCase() === "halls" && (
-                            <>
-                              <MapPin className="mr-1 h-3 w-3" />{" "}
-                              {hall.location}
-                            </>
-                          )}
-                        </CardDescription>
-                      </div>
-                      <div className="flex items-center rounded-md bg-primary/10 px-2 py-1">
-                        <Star className="mr-1 h-3 w-3 fill-primary text-primary" />
-                        <span className="text-xs font-medium">
-                          {hall.rating}
-                        </span>
-                      </div>
+                <Link href={`/fetuers/${fetuer}/${hall.id}`} key={hall.id}>
+                  <Card key={hall.id} className="overflow-hidden">
+                    <div className="aspect-video w-full overflow-hidden">
+                      <Image
+                        src={hall.image || "/placeholder.svg"}
+                        alt={hall.name}
+                        width={500}
+                        height={300}
+                        className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      {hall.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {fetuer.toLowerCase() === "halls" && (
-                        <>
-                          {hall.amenities.slice(0, 3).map((amenity) => (
-                            <span
-                              key={amenity}
-                              className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                            >
-                              {amenity}
-                            </span>
-                          ))}
-
-                          {hall.amenities.length > 3 && (
-                            <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-                              +{hall.amenities.length - 3} more
-                            </span>
-                          )}
-                        </>
-                      )}
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center">
-                          <DollarSign className="h-4 w-4 text-muted-foreground" />
-                          <span className="font-semibold">${hall.price}</span>
-                          <span className="text-xs text-muted-foreground">
-                            /في اليوم
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <CardTitle>{hall.name}</CardTitle>
+                          <CardDescription className="flex items-center mt-1">
+                            {fetuer.toLowerCase() === "halls" && (
+                              <>
+                                <MapPin className="mr-1 h-3 w-3" />{" "}
+                                {hall.location}
+                              </>
+                            )}
+                          </CardDescription>
+                        </div>
+                        <div className="flex items-center rounded-md bg-primary/10 px-2 py-1">
+                          <Star className="mr-1 h-3 w-3 fill-primary text-primary" />
+                          <span className="text-xs font-medium">
+                            {hall.rating}
                           </span>
                         </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        {hall.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-4">
                         {fetuer.toLowerCase() === "halls" && (
-                          <div className="flex items-center">
-                            <Users className="h-4 w-4 text-muted-foreground" />
+                          <>
+                            {hall.amenities.slice(0, 3).map((amenity) => (
+                              <span
+                                key={amenity}
+                                className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                              >
+                                {amenity}
+                              </span>
+                            ))}
 
-                            <span className="ml-1 text-sm">
-                              {hall.capacity}
-                            </span>
-                          </div>
+                            {hall.amenities.length > 3 && (
+                              <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                +{hall.amenities.length - 3} more
+                              </span>
+                            )}
+                          </>
                         )}
                       </div>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <Button variant="outline">رؤية المزيد</Button>
-                    <Button>
-                      <Calendar className="mr-2 h-4 w-4" /> أحجز الان
-                    </Button>
-                  </CardFooter>
-                </Card>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center">
+                            <DollarSign className="h-4 w-4 text-muted-foreground" />
+                            <span className="font-semibold">${hall.price}</span>
+                            <span className="text-xs text-muted-foreground">
+                              /في اليوم
+                            </span>
+                          </div>
+                          {fetuer.toLowerCase() === "halls" && (
+                            <div className="flex items-center">
+                              <Users className="h-4 w-4 text-muted-foreground" />
+
+                              <span className="ml-1 text-sm">
+                                {hall.capacity}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="flex justify-between">
+                      <Button variant="outline">رؤية المزيد</Button>
+                      <Button>
+                        <Calendar className="mr-2 h-4 w-4" /> أحجز الان
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </Link>
               ))}
             </div>
 

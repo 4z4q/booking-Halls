@@ -63,7 +63,6 @@ export default async function HallsPage({
     return service.type === fetuer;
   });
 
-  // console.log(filteredPage);
 
   return (
     <div className="min-h-screen bg-background">
@@ -88,7 +87,7 @@ export default async function HallsPage({
                   تصفية البحث
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right">
+              <SheetContent side="right" className=" max-h-screen overflow-y-auto">
                 <SheetHeader className="pb-0 mt-4">
                   <SheetTitle>تصفية القاعات</SheetTitle>
                   <SheetDescription>

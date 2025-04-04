@@ -1,9 +1,12 @@
+"use client";
 import Link from "next/link";
 import { Search, Bell, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { NAV_LINKS } from "@/constants";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter()
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -39,7 +42,7 @@ const Navbar = () => {
             <Bell className="h-5 w-5" />
             <span className="sr-only">الإشعارات</span>
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button title="تسجيل الدخول" variant="ghost" size="icon" onClick={() => router.push("/auth/sign-in")}>
             <User className="h-5 w-5" />
             <span className="sr-only">الملف الشخصي</span>
           </Button>

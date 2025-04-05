@@ -131,15 +131,16 @@ export default function HallDetailsPage() {
         </button>
 
         {/* عنوان القاعة */}
-        <div className="grid gap-6 md:grid-cols-2 mb-8">
+        <div className="grid gap-6 md:grid-cols-2 mb-8 whitespace-nowrap">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">{hall.name}</h1>
             <div className="flex items-center mt-2 text-muted-foreground">
               <MapPin className="h-4 w-4 ml-1" />
               <span>{hall.address}</span>
             </div>
+
             <div className="flex items-center mt-4 space-x-reverse space-x-4">
-              <div className="flex items-center">
+              <div className="flex items-center flex-col">
                 <div className="flex">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star
@@ -152,20 +153,19 @@ export default function HallDetailsPage() {
                     />
                   ))}
                 </div>
-                <span className="mr-2 font-medium">{hall.rating}</span>
                 <span className="mr-1 text-muted-foreground">
                   ({hall.reviewCount} تقييم)
                 </span>
               </div>
               <Separator orientation="vertical" className="h-6" />
               <div className="flex items-center">
-                <Users className="h-5 w-5 ml-1 text-muted-foreground" />
                 <span>حتى {hall.capacity} شخص</span>
+                <Users className="h-5 w-5 mr-1 text-muted-foreground" />
               </div>
             </div>
           </div>
 
-          <div className="flex justify-end items-end space-x-reverse space-x-2">
+          <div className="flex justify-start items-start flex-row-reverse space-x-reverse space-x-2">
             <Button variant="outline" size="icon" className="rounded-full">
               <Share2 className="h-4 w-4" />
               <span className="sr-only">مشاركة</span>
@@ -293,7 +293,7 @@ export default function HallDetailsPage() {
                 <div className="space-y-8">
                   <div className="flex items-center justify-between">
                     <h2 className="text-xl font-semibold">تقييمات الزوار</h2>
-                    <div className="flex items-center">
+                    <div className="flex items-center flex-col">
                       <div className="flex ml-2">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <Star
@@ -306,7 +306,6 @@ export default function HallDetailsPage() {
                           />
                         ))}
                       </div>
-                      <span className="font-medium">{hall.rating}</span>
                       <span className="mr-1 text-muted-foreground">
                         ({hall.reviewCount} تقييم)
                       </span>

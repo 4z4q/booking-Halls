@@ -1,76 +1,78 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Camera, Star } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Camera, Star } from "lucide-react";
+import Image from "next/image";
 
 export default function ReviewForm() {
-  const [rating, setRating] = useState(0)
-  const [hoverRating, setHoverRating] = useState(0)
-  const [title, setTitle] = useState("")
-  const [comment, setComment] = useState("")
-  const [images, setImages] = useState<File[]>([])
-  const [previewUrls, setPreviewUrls] = useState<string[]>([])
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [title, setTitle] = useState("");
+  const [comment, setComment] = useState("");
+  const [images, setImages] = useState<File[]>([]);
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
   const handleRatingClick = (value: number) => {
-    setRating(value)
-  }
+    setRating(value);
+  };
 
   const handleRatingHover = (value: number) => {
-    setHoverRating(value)
-  }
+    setHoverRating(value);
+  };
 
   const handleRatingLeave = () => {
-    setHoverRating(0)
-  }
+    setHoverRating(0);
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const filesArray = Array.from(e.target.files)
-      setImages((prevImages) => [...prevImages, ...filesArray])
+      const filesArray = Array.from(e.target.files);
+      setImages((prevImages) => [...prevImages, ...filesArray]);
 
       // Create preview URLs
-      const newPreviewUrls = filesArray.map((file) => URL.createObjectURL(file))
-      setPreviewUrls((prevUrls) => [...prevUrls, ...newPreviewUrls])
+      const newPreviewUrls = filesArray.map((file) =>
+        URL.createObjectURL(file)
+      );
+      setPreviewUrls((prevUrls) => [...prevUrls, ...newPreviewUrls]);
     }
-  }
+  };
 
   const removeImage = (index: number) => {
-    const newImages = [...images]
-    newImages.splice(index, 1)
-    setImages(newImages)
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
 
-    const newPreviewUrls = [...previewUrls]
-    URL.revokeObjectURL(newPreviewUrls[index])
-    newPreviewUrls.splice(index, 1)
-    setPreviewUrls(newPreviewUrls)
-  }
+    const newPreviewUrls = [...previewUrls];
+    URL.revokeObjectURL(newPreviewUrls[index]);
+    newPreviewUrls.splice(index, 1);
+    setPreviewUrls(newPreviewUrls);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically send the review data to your API
-    console.log({ rating, title, comment, images })
+    console.log({ rating, title, comment, images });
 
     // Reset form
-    setRating(0)
-    setTitle("")
-    setComment("")
-    setImages([])
-    setPreviewUrls([])
-  }
+    setRating(0);
+    setTitle("");
+    setComment("");
+    setImages([]);
+    setPreviewUrls([]);
+  };
 
   return (
     <div className="bg-card rounded-xl border p-6">
-      <h3 className="text-lg font-semibold mb-4">Write a Review</h3>
+      <h3 className="text-lg font-semibold mb-4">اكتب تقييمك</h3>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="rating" className="text-sm font-medium">
-            Your Rating
+            تقييمك
           </Label>
           <div className="flex" onMouseLeave={handleRatingLeave}>
             {[1, 2, 3, 4, 5].map((value) => (
@@ -83,7 +85,9 @@ export default function ReviewForm() {
               >
                 <Star
                   className={`h-6 w-6 transition-colors ${
-                    (hoverRating || rating) >= value ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+                    (hoverRating || rating) >= value
+                      ? "text-yellow-400 fill-yellow-400"
+                      : "text-gray-300"
                   }`}
                 />
               </button>
@@ -93,13 +97,13 @@ export default function ReviewForm() {
 
         <div className="space-y-2">
           <Label htmlFor="title" className="text-sm font-medium">
-            Review Title
+            عنوان التقييم
           </Label>
           <Input
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Summarize your experience"
+            placeholder="اختصر تجربتك في عبارة"
             className="transition-all border-gray-200 focus:border-purple-500 focus:ring focus:ring-purple-200"
             required
           />
@@ -107,30 +111,33 @@ export default function ReviewForm() {
 
         <div className="space-y-2">
           <Label htmlFor="comment" className="text-sm font-medium">
-            Your Review
+            تفاصيل التقييم
           </Label>
           <Textarea
             id="comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            placeholder="Share your experience with this venue. What did you like or dislike?"
-            className="min-h-[120px] transition-all border-gray-200 focus:border-purple-500 focus:ring focus:ring-purple-200"
+            placeholder="شاركنا تجربتك مع هذا المكان. ما الذي أعجبك أو لم يعجبك؟"
+            className="resize-none  max-h-[120px] transition-all border-gray-200 focus:border-purple-500 focus:ring focus:ring-purple-200"
             required
+            maxLength={250}
           />
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="images" className="text-sm font-medium">
-            Add Photos (Optional)
+            أضف صورًا (اختياري)
           </Label>
           <div className="flex flex-wrap gap-2">
             {previewUrls.map((url, index) => (
-              <div key={index} className="relative group">
+              <div key={index} className="relative ">
                 <div className="h-20 w-20 rounded-md overflow-hidden border">
-                  <img
+                  <Image
                     src={url || "/placeholder.svg"}
-                    alt={`Preview ${index}`}
+                    alt={`معاينة ${index}`}
                     className="h-full w-full object-cover"
+                    width={200}
+                    height={200}
                   />
                 </div>
                 <button
@@ -142,21 +149,25 @@ export default function ReviewForm() {
                 </button>
               </div>
             ))}
-            <label className="h-20 w-20 rounded-md border-2 border-dashed border-gray-300 flex flex-col items-center justify-center cursor-pointer hover:border-purple-500 transition-colors">
-              <Camera className="h-6 w-6 text-muted-foreground" />
-              <span className="text-xs text-muted-foreground mt-1">Add Photo</span>
-              <input
-                id="images"
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImageChange}
-                className="hidden"
-              />
-            </label>
+            {images.length < 2 && (
+              <label className="h-20 w-20 rounded-md border-2 border-dashed border-gray-300 flex flex-col items-center justify-center cursor-pointer hover:border-purple-500 transition-colors">
+                <Camera className="h-6 w-6 text-muted-foreground" />
+                <span className="text-xs text-muted-foreground mt-1">
+                  أضف صورة
+                </span>
+                <input
+                  id="images"
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+              </label>
+            )}
           </div>
           <p className="text-xs text-muted-foreground">
-            You can upload up to 5 photos. Each photo should be less than 5MB.
+            يمكنك رفع حتى 5 صور. يجب أن يكون حجم كل صورة أقل من 5 ميغابايت.
           </p>
         </div>
 
@@ -164,10 +175,9 @@ export default function ReviewForm() {
           type="submit"
           className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 transition-all"
         >
-          Submit Review
+          إرسال التقييم
         </Button>
       </form>
     </div>
-  )
+  );
 }
-

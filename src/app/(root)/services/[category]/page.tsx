@@ -36,38 +36,88 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { services } from "@/constants/servises";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { allowedCategories, services } from "@/constants/services-data";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string };
+}) {
+  const { category } = await params;
+
+  // Format the category name for display (capitalize first letter)
+  const formattedCategory =
+    category.charAt(0).toUpperCase() + category.slice(1);
+
+  return {
+    title: `${formattedCategory} - خدمات المناسبات`,
+    description: `تصفح خدمات ${formattedCategory} لمناسباتك الخاصة`,
+  };
+}
 
 export default async function HallsPage({
   params,
 }: {
-  params: { fetuer: string };
+  params: { category: string };
 }) {
-  const { fetuer } = await params;
+  // Extract the category parameter
+  const { category } = await params;
 
-  const found = services.find((service) => service.type === fetuer);
+  // Check if this is a valid category
+  const isValidCategory = allowedCategories.some(
+    (cat) => cat.category === category
+  );
 
-  if (!found) {
+  if (!isValidCategory) {
     notFound();
   }
 
-  console.log(fetuer);
+  // Filter services by the category
+  const filteredServices = services.filter(
+    (service) => service.type === category
+  );
 
-  const filteredPage = services.filter((service) => {
-    return service.type === fetuer;
-  });
+  // If no services match the category, show 404
+  if (filteredServices.length === 0) {
+    notFound();
+  }
+
+  // Format the category name for display (capitalize first letter)
+  // const formattedCategory =
+  //   category.charAt(0).toUpperCase() + category.slice(1);
+
+  // Get the Arabic category name
+  const getCategoryNameInArabic = (category: string) => {
+    switch (category) {
+      case "halls":
+        return "القاعات";
+      case "decor":
+        return "الديكور";
+      case "artists":
+        return "الفنانين";
+      case "clothing":
+        return "الأزياء";
+      case "photography":
+        return "التصوير";
+      default:
+        return category;
+    }
+  };
+
+  const arabicCategoryName = getCategoryNameInArabic(category);
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container py-8">
+      <div className="container px-4   md:py-8">
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">قاعات المناسبات</h1>
+        <div className="mb-8 text-right">
+          <h1 className="text-3xl font-bold tracking-tight">
+            {arabicCategoryName}
+          </h1>
           <p className="mt-2 text-muted-foreground">
-            اكتشف واحجز القاعة المثالية لحفلك القادم، سواء كان زفافًا، مؤتمرًا،
-            أو أي مناسبة خاصة.
+            اختر من بين أفضل خدمات {arabicCategoryName} لمناسبتك الخاصة
           </p>
         </div>
 
@@ -294,9 +344,11 @@ export default async function HallsPage({
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-semibold">القاعات المتاحة</h2>
+                <h2 className="text-xl font-semibold">
+                  {arabicCategoryName} المتوفر
+                </h2>
                 <p className="text-sm text-muted-foreground">
-                  عرض {filteredPage.length} قاعة
+                  عرض {filteredServices.length} قاعة
                 </p>
               </div>
               <Select defaultValue="recommended">
@@ -318,8 +370,8 @@ export default async function HallsPage({
             </div>
 
             <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-              {filteredPage.map((hall) => (
-                <Link href={`/fetuers/${fetuer}/${hall.id}`} key={hall.id}>
+              {filteredServices.map((hall) => (
+                <Link href={`/services/${category}/${hall.id}`} key={hall.id}>
                   <Card key={hall.id} className="overflow-hidden">
                     <div className="aspect-video w-full overflow-hidden">
                       <Image
@@ -335,7 +387,7 @@ export default async function HallsPage({
                         <div>
                           <CardTitle>{hall.name}</CardTitle>
                           <CardDescription className="flex items-center mt-1">
-                            {fetuer.toLowerCase() === "halls" && (
+                            {category.toLowerCase() === "halls" && (
                               <>
                                 <MapPin className="mr-1 h-3 w-3" />{" "}
                                 {hall.location}
@@ -355,26 +407,7 @@ export default async function HallsPage({
                       <p className="text-sm text-muted-foreground mb-4">
                         {hall.description}
                       </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {fetuer.toLowerCase() === "halls" && (
-                          <>
-                            {hall.amenities.slice(0, 3).map((amenity) => (
-                              <span
-                                key={amenity}
-                                className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                              >
-                                {amenity}
-                              </span>
-                            ))}
 
-                            {hall.amenities.length > 3 && (
-                              <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-                                +{hall.amenities.length - 3} more
-                              </span>
-                            )}
-                          </>
-                        )}
-                      </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                           <div className="flex items-center">
@@ -384,7 +417,7 @@ export default async function HallsPage({
                               /في اليوم
                             </span>
                           </div>
-                          {fetuer.toLowerCase() === "halls" && (
+                          {category.toLowerCase() === "halls" && (
                             <div className="flex items-center">
                               <Users className="h-4 w-4 text-muted-foreground" />
 

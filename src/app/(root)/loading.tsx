@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-const loading = () => {
+const Loading = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container py-8">
@@ -57,4 +57,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default Loading;

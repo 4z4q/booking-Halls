@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background ">
-      <main>
+      <main className="container py-8">
         {/* Hero Section */}
         <section className="mb-12">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -173,14 +173,14 @@ export default function Home() {
         </section>
 
         {/* Trending Reviews Section */}
-        <div className="min-h-screen bg-background">
-          <div className="container px-4 md:py-8">
+        <div className="min-h-screen  mb-12 ">
+          <div className="container px-0">
             {/* Page Header */}
             <div className="mb-12 text-center">
               <h1 className="text-4xl font-bold tracking-tight mb-4">
                 خدمات المناسبات
               </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto border-b border-muted-foreground pb-2 rounded">
                 اختر من بين مجموعة متنوعة من الخدمات لجعل مناسبتك لا تُنسى
               </p>
             </div>
@@ -242,6 +242,14 @@ export default function Home() {
 
         {/* What's New Today Section */}
         <section className="mb-12">
+          <div className="mb-12 text-center">
+            <h1 className="text-4xl font-bold tracking-tight mb-4">
+              أستمتع باخر العروض
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto border-b border-muted-foreground pb-2 rounded">
+              اختر من بين مجموعة متنوعة من العروض لجعل مناسبتك لا تُنسى
+            </p>
+          </div>
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-bold">عروض اليوم</h2>
             <Button variant="outline" className="gap-1">

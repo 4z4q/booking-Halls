@@ -173,7 +173,7 @@ export default function Home() {
         </section>
 
         {/* Trending Reviews Section */}
-        <div className="min-h-screen  mb-12 ">
+        <div className="min-h-screen  mb-12" id="trending-reviews">
           <div className="container px-0">
             {/* Page Header */}
             <div className="mb-12 text-center">

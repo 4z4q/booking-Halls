@@ -9,6 +9,11 @@
   box-sizing: border-box;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
+
 img{
   width: 100% !important;
   aspect-ratio: 1/1 !important;

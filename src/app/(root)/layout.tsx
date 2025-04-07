@@ -10,10 +10,12 @@ export default function RootLayout({
   return (
     <>
       <Navbar />
-      <div className="container py-6 ">
-        <main className="relative overflow-hidden shadow-xl bg-white">{children}</main>
-        <Footer />
+      <div className="bg-muted py-6  ">
+        <main className="container relative px-4 overflow-hidden bg-white">
+          {children}
+        </main>
       </div>
+      <Footer />
     </>
   );
 }

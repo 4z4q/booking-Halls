@@ -123,9 +123,9 @@ export default function ReviewList({
           <div key={review.id} className="space-y-4">
             <div className="flex items-start justify-between">
               <div className="flex items-center">
-                <div className="relative h-10 w-10 rounded-full overflow-hidden mr-3">
+                <div className="relative h-10 w-10 rounded-full overflow-hidden ml-3">
                   <Image
-                    src={review.user.image || "/placeholder.svg"}
+                    src={"/person.jpg"}
                     alt={review.user.name}
                     fill
                     className="object-cover"

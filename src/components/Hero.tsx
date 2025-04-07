@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background ">
-      <main className="container py-8">
+      <main className=" py-[16px]">
         {/* Hero Section */}
         <section className="mb-12">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -174,7 +174,7 @@ export default function Home() {
 
         {/* Trending Reviews Section */}
         <div className="min-h-screen  mb-12" id="trending-reviews">
-          <div className="container px-0">
+          <div className=" px-0">
             {/* Page Header */}
             <div className="mb-12 text-center">
               <h1 className="text-4xl font-bold tracking-tight mb-4">

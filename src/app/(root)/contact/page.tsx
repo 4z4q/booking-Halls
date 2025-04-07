@@ -28,18 +28,21 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-purple-600 to-blue-500 text-white rounded-t-[6px]">
-        <div className="absolute inset-0 bg-grid-white/[0.2] [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
-        <div className="container relative py-20 text-center">
-          <h1 className="text-4xl font-bold mb-6">تواصل معنا</h1>
-          <p className="text-xl max-w-2xl mx-auto">
+      <section className="w-screen relative left-1/2 right-1/2 mx-[-50vw] bg-gradient-to-b from-purple-600 to-blue-500 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative py-16 md:py-24 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight">
+            تواصل معنا
+          </h1>
+          <p className="text-sm md:text-xl max-w-2xl mx-auto leading-relaxed">
             نحن هنا للإجابة على استفساراتك وتقديم الدعم اللازم لك
           </p>
         </div>
       </section>
 
       {/* Contact Info & Form */}
-      <section className="container py-16">
+      <section className=" py-16">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Contact Info */}
           <div className="md:col-span-1">
@@ -64,7 +67,9 @@ export default function ContactPage() {
                 <div className="flex items-center  md:justify-between justify-start ">
                   <div className="text-right">
                     <p className="font-medium">البريد الإلكتروني</p>
-                    <p className="text-muted-foreground ">info@techreview.com</p>
+                    <p className="text-muted-foreground ">
+                      info@techreview.com
+                    </p>
                   </div>
                   <div className="h-10 w-10 rounded-full bg-blue-100  items-center md:flex hidden justify-center m4-4">
                     <Mail className="h-5 w-5  text-blue-600" />
@@ -116,7 +121,7 @@ export default function ContactPage() {
               </TabsList>
 
               <TabsContent value="contact" className="space-y-8">
-                <div className="bg-card rounded-xl border p-8 shadow-sm">
+                <div className="bg-card rounded-xl border p-4 md:p-8 shadow-sm">
                   <h2 className="text-2xl font-bold mb-6 text-right">
                     أرسل لنا رسالة
                   </h2>

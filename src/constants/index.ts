@@ -1,18 +1,18 @@
 // القائمة الرئيسية
 export const NAV_LINKS = [
   { href: '/', key: 'home', label: 'الصفحة الرئيسية' },
-  { href: '/', key: 'about', label: 'حول' },
+  { href: '/about', key: 'about', label: 'حول' },
   { href: '#trending-reviews', key: 'services', label: 'الخدمات' },
   { href: '/', key: 'support', label: 'الدعم' },
-  { href: '/', key: 'contact_us', label: 'تواصل معنا' },
+  { href: '/contact', key: 'contact_us', label: 'تواصل معنا' },
 ];
 
 // قسم المعسكر
 export const PEOPLE_URL = [
-  '/person-1.png',
-  '/person-2.png',
-  '/person-3.png',
-  '/person-4.png',
+  '/person.jpg',
+  '/person.jpg',
+  '/person.jpg',
+  '/person.jpg',
 ];
 
 // قسم الميزات

@@ -6,17 +6,18 @@ import { NAV_LINKS } from "@/constants";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2">
             <div className="relative h-8 w-8">
-              <div className="absolute h-8 w-8 rounded-full bg-purple-600"></div>
-              <div className="absolute h-6 w-6 translate-x-1 translate-y-1 rounded-full bg-blue-500"></div>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-blue-500">
+                <span className="text-sm font-bold text-white">ع</span>
+              </div>
             </div>
-            <span className="text-xl font-bold">عرسك علينا</span>
+            <h3 className="text-lg font-bold md:text-xl">عرسك علينا</h3>
           </Link>
           <nav className="hidden md:flex">
             <ul className="flex items-center gap-6">
@@ -42,7 +43,12 @@ const Navbar = () => {
             <Bell className="h-5 w-5" />
             <span className="sr-only">الإشعارات</span>
           </Button>
-          <Button title="تسجيل الدخول" variant="ghost" size="icon" onClick={() => router.push("/auth/sign-in")}>
+          <Button
+            title="تسجيل الدخول"
+            variant="ghost"
+            size="icon"
+            onClick={() => router.push("/auth/sign-in")}
+          >
             <User className="h-5 w-5" />
             <span className="sr-only">الملف الشخصي</span>
           </Button>

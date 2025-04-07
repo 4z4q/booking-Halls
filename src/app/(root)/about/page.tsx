@@ -217,7 +217,7 @@ export default function AboutPage() {
             <div key={index} className="text-center">
               <div className="relative h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48 rounded-full overflow-hidden mx-auto mb-3 md:mb-4">
                 <Image
-                  src={`/person.jpg${index + 1}`}
+                  src={`/person.jpg`}
                   alt={member.name}
                   fill
                   className="object-cover"

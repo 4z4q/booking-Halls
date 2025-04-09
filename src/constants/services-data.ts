@@ -130,6 +130,7 @@ export const servicesData = [
       "/newOffers/pexels-mlkbnl-10282410.jpg",
       "/newOffers/pexels-grish-petrosyan-3756797-15684451.jpg",
       "/newOffers/pexels-alexander-mass-748453803-30934230.jpg",
+      "/newOffers/pexels-grish-petrosyan-3756797-15684451.jpg",
       "/newOffers/pexels-adeniuso-gomes-2148096772-30679836.jpg",
     ],
     description: "تصميم أزياء فريدة للمناسبات الخاصة",

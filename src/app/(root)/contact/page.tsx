@@ -4,7 +4,6 @@ import {
   Mail,
   MapPin,
   Clock,
-  MessageSquare,
   HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -185,28 +184,7 @@ export default function ContactPage() {
                   </form>
                 </div>
 
-                <div className="bg-muted rounded-xl p-8">
-                  <div className="flex items-center justify-end mb-4">
-                    <h3 className="text-xl font-semibold">
-                      انضم إلى نشرتنا الإخبارية
-                    </h3>
-                    <MessageSquare className="h-6 w-6 ml-2 text-purple-600" />
-                  </div>
-
-                  <p className="text-muted-foreground mb-4 text-right">
-                    اشترك في نشرتنا الإخبارية للحصول على آخر العروض والتحديثات
-                  </p>
-
-                  <div className="flex gap-2">
-                    <Button className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600">
-                      اشترك
-                    </Button>
-                    <Input
-                      placeholder="أدخل بريدك الإلكتروني"
-                      className="text-right"
-                    />
-                  </div>
-                </div>
+ 
               </TabsContent>
 
               <TabsContent value="support" className="space-y-8">

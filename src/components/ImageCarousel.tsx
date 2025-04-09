@@ -1,0 +1,69 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Image from "next/image";
+
+export function CarouselSize({ gallery }: { gallery: string[] }) {
+  return (
+<Carousel
+  opts={{ align: "start", loop: true }}
+  className="w-full mb-8 space-y-4"
+  dir="ltr"
+>
+  <CarouselContent>
+    {gallery.map((src, index) => (
+      <CarouselItem
+        key={index}
+        className="basis-[100%] md:basis-1/3 lg:basis-1/4"
+      >
+        <div className="p-1  md:h-[250px] lg:h-[300px]">
+          <Image
+            src={src}
+            width={1200}
+            height={600}
+            alt={`Slide ${index + 1}`}
+            className="rounded-md object-cover w-full h-full"
+          />
+        </div>
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+  <CarouselPrevious className="left-2" />
+  <CarouselNext className="right-2" />
+</Carousel>
+
+  );
+}
+
+{
+  /* <div className="mb-8 space-y-4">
+      <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl">
+        <Image
+          src={service.image || "/placeholder.svg"}
+          alt={service.name}
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {service.gallery?.map((image, index) => (
+          <div
+            key={index}
+            className="relative aspect-[4/3] overflow-hidden rounded-lg"
+          >
+            <Image
+              src={image || "/placeholder.svg"}
+              alt={`${service.name} - صورة ${index + 1}`}
+              fill
+              className="object-cover transition-transform duration-300 hover:scale-105"
+            />
+          </div>
+        ))}
+      </div>
+    </div> */
+}

@@ -6,6 +6,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 const Footer = () => {
   return (
@@ -247,19 +249,16 @@ const Footer = () => {
           </p>
           <form className="space-y-2">
             <div className="relative">
-              <input
+              <Input
                 type="email"
                 placeholder="اكتب بريدك الالكتروني"
                 className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 required
               />
             </div>
-            <button
-              type="submit"
-              className="inline-flex h-9 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-            >
-              أشتراك
-            </button>
+            <Button type="submit" className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 w-full">
+              اشترك
+            </Button>
           </form>
         </div>
       </Accordion>

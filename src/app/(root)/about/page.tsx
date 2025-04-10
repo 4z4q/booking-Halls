@@ -16,7 +16,7 @@ export default function AboutPage() {
       <section className="relative bg-gradient-to-b from-purple-600 to-blue-500 text-white w-screen  left-1/2 right-1/2 mx-[-50vw]">
         <div className="absolute inset-0 bg-grid-white/[0.2] [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
         <div className="container px-[16px] relative py-12 md:py-20 text-center ">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6  ">
             من نحن
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto">

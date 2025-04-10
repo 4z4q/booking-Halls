@@ -3,7 +3,15 @@ import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { allowedCategories } from "@/constants/services-data";
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Input } from "./ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "./ui/label";
 
 export const metadata = {
   title: "خدمات المناسبات - TechReview",
@@ -68,6 +76,44 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background ">
       <main className=" py-[16px]">
+        <div className="mb-4 py-2 space-y-2 sm:space-y-0 sm:flex sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div className="w-full">
+            <Label
+              htmlFor="search"
+              className="block mb-1 text-sm font-medium text-muted-foreground"
+            >
+              ابحث عن الخدمة
+            </Label>
+            <Input
+              id="search"
+              type="text"
+              placeholder="مثلًا: قاعة، فنان، تصوير..."
+              className="w-fit px-4 py-2 focus:outline-none focus:ring focus:ring-primary"
+            />
+          </div>
+
+          <div className="w-full sm:w-[300px]">
+            <Label
+              htmlFor="capacity"
+              className="block mb-1 text-sm font-medium text-muted-foreground"
+            >
+              سعة القاعة
+            </Label>
+            <Select>
+              <SelectTrigger id="capacity" className="w-full" dir="rtl">
+                <SelectValue placeholder="اختر السعة" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="50">حتى 50 شخصًا</SelectItem>
+                <SelectItem value="100">حتى 100 شخص</SelectItem>
+                <SelectItem value="200">حتى 200 شخص</SelectItem>
+                <SelectItem value="500">حتى 500 شخص</SelectItem>
+                <SelectItem value="1000">أكثر من 500 شخص</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
         {/* Hero Section */}
         <section className="mb-12">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

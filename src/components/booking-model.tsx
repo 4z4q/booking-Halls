@@ -3,7 +3,7 @@
 import type React from "react";
 
 import { useState } from "react";
-import { format } from "date-fns";
+import { format, addMonths, isBefore, isAfter } from "date-fns";
 import { ar } from "date-fns/locale"; // Fixed import - removed 'se'
 import { CalendarIcon, Clock, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,18 +16,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { Calendar } from "@/components/ui/calendar";
 
 interface BookingModalProps {
   serviceName: string;
@@ -67,7 +61,6 @@ const timeSlots = [
 
 export function BookingModal({
   serviceName,
-  serviceImage,
   servicePrice,
   serviceLocation,
   serviceType,
@@ -133,6 +126,33 @@ export function BookingModal({
     }
   };
 
+  const today = new Date();
+  const maxDate = addMonths(today, 2); // Allow booking for the next two months
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedDate = new Date(e.target.value);
+    selectedDate.setHours(0, 0, 0, 0);
+    // Set hours, minutes, seconds, and milliseconds to 0 because we only care about the date
+    today.setHours(0, 0, 0, 0);
+
+    if (isBefore(selectedDate, today)) {
+      alert("لا يمكنك اختيار تاريخ في الماضي.");
+      return;
+    }
+
+    if (isAfter(selectedDate, maxDate)) {
+      alert("يمكنك الحجز خلال الشهرين القادمين فقط.");
+      return;
+    }
+
+    if (selectedDate.getDay() === 5) {
+      alert("يوم الجمعة غير متاح للحجز.");
+      return;
+    }
+
+    setDate(selectedDate);
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -149,12 +169,12 @@ export function BookingModal({
             <div className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="date">التاريخ</Label>
-                <Popover>
+                {/* <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
                       className={cn(
-                        "w-full justify-end  font-normal ",
+                        "w-full justify-end font-normal",
                         !date && "text-muted-foreground"
                       )}
                     >
@@ -164,20 +184,31 @@ export function BookingModal({
                       <CalendarIcon className="ml-2 h-4 w-4" />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent
-                    className="w-auto p-0"
-                  >
+                  <PopoverContent className="w-auto p-0">
                     <Calendar
                       mode="single"
                       selected={date}
                       onSelect={(selectDate) => {
                         console.log(selectDate);
                         setDate(selectDate);
+                        // لتفادي إغلاق الـ Popover عند اختيار التاريخ
                       }}
                       className="rounded-md border"
                     />
                   </PopoverContent>
-                </Popover>
+                </Popover> */}
+
+                <div className="relative mb-4">
+                  <input
+                    type="date"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    value={date ? format(date, "yyyy-MM-dd") : ""}
+                    onChange={handleDateChange}
+                    min={format(today, "yyyy-MM-dd")}
+                    max={format(maxDate, "yyyy-MM-dd")}
+                  />
+                  <i className="fas fa-calendar-alt absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -212,8 +243,8 @@ export function BookingModal({
         {step === 2 && (
           <>
             <DialogHeader className="mt-3">
-              <DialogTitle>معلومات الحجز</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="text-right">معلومات الحجز</DialogTitle>
+              <DialogDescription className="text-right">
                 أدخل معلوماتك الشخصية لإتمام الحجز
               </DialogDescription>
             </DialogHeader>
@@ -278,8 +309,8 @@ export function BookingModal({
         {step === 3 && (
           <>
             <DialogHeader className="mt-3">
-              <DialogTitle>تأكيد الحجز</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="text-right">تأكيد الحجز</DialogTitle>
+              <DialogDescription className="text-right">
                 راجع تفاصيل الحجز قبل التأكيد
               </DialogDescription>
             </DialogHeader>

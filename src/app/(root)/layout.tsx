@@ -1,15 +1,19 @@
 import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+// import { redirect } from "next/navigation";
+import { auth } from "../../../auth";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+  // if (!session) redirect("/sign-in");
   return (
     <>
-      <Navbar />
+      <Navbar session={session} />
       <div className="bg-muted py-6  ">
         <main className="container relative px-4 overflow-hidden bg-white">
           {children}

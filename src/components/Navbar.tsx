@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Bell, User, ShoppingCart } from "lucide-react";
+import { Menu, X, Bell, User, ShoppingCart, LogIn } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button"; // تأكد من المسار الصحيح
 import { useRouter } from "next/navigation";
 import { NAV_LINKS } from "@/constants";
+import { Session } from "next-auth";
 
-
-const Navbar = () => {
+const Navbar = ({ session }: { session: Session }) => {
   const router = useRouter();
   const [nav, setNav] = useState(false);
 
@@ -24,6 +24,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex flex-col">
         <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center gap-6 whitespace-nowrap">
             <Link href="/" className="flex items-center gap-2 z-10">
               <div className="relative h-8 w-8">
@@ -31,7 +32,7 @@ const Navbar = () => {
                   <span className="text-sm font-bold text-white">ع</span>
                 </div>
               </div>
-              <h3 className="text-lg font-bold md:text-xl">عرسك علينا</h3>
+              <h3 className="text-lg font-bold md:text-xl"> لحظات </h3>
             </Link>
 
             {/* روابط الأقسام */}
@@ -58,13 +59,18 @@ const Navbar = () => {
             <Button variant="ghost" size="icon">
               <Bell className="h-5 w-5" />
             </Button>
+
             <Button
               title="تسجيل الدخول"
               variant="ghost"
               size="icon"
-              onClick={() => router.push("/sign-in")}
+              onClick={() => router.push(session ? "/profile" : "/login")}
             >
-              <User className="h-5 w-5" />
+              {session ? (
+                <User className="h-5 w-5" />
+              ) : (
+                <LogIn className="h-5 w-5" />
+              )}
             </Button>
           </div>
 

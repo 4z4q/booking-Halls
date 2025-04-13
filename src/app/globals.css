@@ -2,19 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
-
-img{
+img {
   width: 100% !important;
   aspect-ratio: 1/1 !important;
 }
@@ -74,4 +72,3 @@ img{
     @apply bg-background text-foreground;
   }
 }
-

@@ -1,23 +1,12 @@
+"use client";
 import Image from "next/image";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { allowedCategories } from "@/constants/services-data";
-import { Input } from "./ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Label } from "./ui/label";
-
-export const metadata = {
-  title: "خدمات المناسبات - TechReview",
-  description: "تصفح مجموعة متنوعة من خدمات المناسبات والحفلات",
-};
-
+import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
 export default function Home() {
   // Get the Arabic category name
   const getCategoryNameInArabic = (category: string) => {
@@ -73,150 +62,82 @@ export default function Home() {
     }
   };
 
+  const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
+
   return (
     <div className="min-h-screen bg-background ">
       <main className=" py-[16px]">
-        <div className="mb-4 py-2 space-y-2 sm:space-y-0 sm:flex sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div className="w-full">
-            <Label
-              htmlFor="search"
-              className="block mb-1 text-sm font-medium text-muted-foreground"
-            >
-              ابحث عن الخدمة
-            </Label>
-            <Input
-              id="search"
-              type="text"
-              placeholder="مثلًا: قاعة، فنان، تصوير..."
-              className="w-fit px-4 py-2 focus:outline-none focus:ring focus:ring-primary"
-            />
-          </div>
-
-          <div className="w-full sm:w-[300px]">
-            <Label
-              htmlFor="capacity"
-              className="block mb-1 text-sm font-medium text-muted-foreground"
-            >
-              سعة القاعة
-            </Label>
-            <Select>
-              <SelectTrigger id="capacity" className="w-full" dir="rtl">
-                <SelectValue placeholder="اختر السعة" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="50">حتى 50 شخصًا</SelectItem>
-                <SelectItem value="100">حتى 100 شخص</SelectItem>
-                <SelectItem value="200">حتى 200 شخص</SelectItem>
-                <SelectItem value="500">حتى 500 شخص</SelectItem>
-                <SelectItem value="1000">أكثر من 500 شخص</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
         {/* Hero Section */}
-        <section className="mb-12">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <div className="relative col-span-2 row-span-2 overflow-hidden rounded-xl">
-              <Image
-                src={"/pexels-yusuf-rendecioglu-art-333084496-17871049.jpg"} //""https://placehold.co/600x400/png"}
-                alt="Featured Article"
-                width={800}
-                height={600}
-                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-              <div className="absolute bottom-0 p-6 text-white">
-                <span className="mb-2 inline-block rounded bg-purple-600 px-2 py-1 text-xs font-medium">
-                  ماذا تنتظر !
-                </span>
-                <h2 className="mb-2 text-2xl font-bold">
-                  حقق حلم زفافك بكل سهولة!
-                </h2>
-                <p className="text-sm text-gray-200">
-                  احجز قاعة زفافك، اختر فنانك المفضل، واستعد ليومك المميز بكل
-                  التفاصيل في مكان واحد.
-                </p>
-              </div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-xl">
-              <Image
-                src={"/pexels-bertellifotografia-17023018.jpg"} //""https://placehold.co/300x400/png"}
-                alt="Tech Article"
-                width={400}
-                height={300}
-                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-              <div className="absolute bottom-0 p-4 text-white">
-                <span className="mb-1 inline-block rounded bg-blue-600 px-2 py-1 text-xs font-medium">
-                  لحجز القاعات
-                </span>
-                <h3 className="text-sm font-bold">
-                  اختر القاعة المثالية لحفل زفاف لا يُنسى
-                </h3>
-              </div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-xl">
-              <Image
-                src={"/pexels-suvan-chowdhury-37305-144429.jpg"} //""https://placehold.co/300x400/png"}
-                alt="Tech Article"
-                width={400}
-                height={300}
-                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-              <div className="absolute bottom-0 p-4 text-white">
-                <span className="mb-1 inline-block rounded bg-blue-600 px-2 py-1 text-xs font-medium">
-                  لحجز الفنانين
-                </span>
-                <h3 className="text-sm font-bold">
-                  أضف لمسة فنية إلى حفلك مع أفضل الفنانين
-                </h3>
-              </div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-xl">
-              <Image
-                src={"/pexels-aftabmirza-25293843.jpg"} //""https://placehold.co/300x400/png"}
-                alt="Tech Article"
-                width={400}
-                height={300}
-                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-              <div className="absolute bottom-0 p-4 text-white">
-                <span className="mb-1 inline-block rounded bg-blue-600 px-2 py-1 text-xs font-medium">
-                  لحجز ملابس العرس
-                </span>
-                <h3 className="text-sm font-bold">
-                  إطلالة الأحلام تبدأ من هنا – اكتشف أرقى فساتين وأطقم الزفاف
-                </h3>
-              </div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-xl">
-              <Image
-                src={"/pexels-kawerodriguess-16313529.jpg"} //"https://placehold.co/300x400/png"
-                alt="Tech Article"
-                width={400}
-                height={300}
-                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-              <div className="absolute bottom-0 p-4 text-white">
-                <span className="mb-1 inline-block rounded bg-blue-600 px-2 py-1 text-xs font-medium">
-                  لحجز مصور العرس
-                </span>
-                <h3 className="text-sm font-bold">
-                  اكتشف جميع التصاميم المميزة للحفلات الزفاف
-                </h3>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Carousel
+          plugins={[plugin.current]}
+          className="mb-12"
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
+          dir="ltr"
+        >
+          <CarouselContent>
+            {[
+              {
+                image: "/pexels-yusuf-rendecioglu-art-333084496-17871049.jpg",
+                tag: "ماذا تنتظر !",
+                title: "حقق حلم زفافك بكل سهولة!",
+                description:
+                  "احجز قاعة زفافك، اختر فنانك المفضل، واستعد ليومك المميز بكل التفاصيل.",
+              },
+              {
+                image: "/pexels-bertellifotografia-17023018.jpg",
+                tag: "لحجز القاعات",
+                title: "اختر القاعة المثالية لحفل زفاف لا يُنسى",
+                description:
+                  "أماكن مذهلة، خدمات متكاملة، حفل يليق بك وبمن تحب.",
+              },
+              {
+                image: "/pexels-suvan-chowdhury-37305-144429.jpg",
+                tag: "لحجز الفنانين",
+                title: "أضف لمسة فنية إلى حفلك مع أفضل الفنانين",
+                description: "فنانين محترفين، أجواء ساحرة، حفلة لا تُنسى.",
+              },
+              {
+                image: "/pexels-aftabmirza-25293843.jpg",
+                tag: "لحجز ملابس العرس",
+                title: "إطلالة الأحلام تبدأ من هنا",
+                description: "اكتشف أرقى فساتين وأطقم الزفاف التي تليق بك.",
+              },
+              {
+                image: "/pexels-kawerodriguess-16313529.jpg",
+                tag: "لحجز مصور العرس",
+                title: "توثيق لحظاتك بأدق التفاصيل",
+                description: "مصورون محترفون يصنعون من كل لحظة ذكرى خالدة.",
+              },
+            ].map((item, index) => (
+              <CarouselItem
+                key={index}
+                className="relative overflow-hidden rounded-xl w-[90%] sm:w-[320px] md:w-[400px] lg:w-[500px] h-[180px] sm:h-[200px] md:h-[250px] lg:h-[280px] mx-auto"
+                dir="rtl"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                  width={400}
+                  height={300}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                <div className="absolute bottom-0 p-4 text-white">
+                  <span className="mb-1 inline-block rounded bg-purple-600 px-2 py-1 text-xs font-medium">
+                    {item.tag}
+                  </span>
+                  <h2 className="mb-1 text-base sm:text-lg md:text-xl font-bold">
+                    {item.title}
+                  </h2>
+                  <p className="text-xs sm:text-sm md:text-base text-gray-200">
+                    {item.description}
+                  </p>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
 
         {/* Trending Reviews Section */}
         <div className="min-h-screen  mb-12" id="trending-reviews">
@@ -384,156 +305,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Tech & Gadgets Section */}
-        {/* <section>
-          <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-2xl font-bold">Tech & Gadgets</h2>
-            <Button variant="outline" className="gap-1">
-              View All
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
-          <Tabs defaultValue="tech" className="w-full">
-            <TabsList className="mb-6">
-              <TabsTrigger value="tech">Tech</TabsTrigger>
-              <TabsTrigger value="electronics">Electronics</TabsTrigger>
-              <TabsTrigger value="gadgets">Gadgets</TabsTrigger>
-            </TabsList>
-            <TabsContent value="tech" className="mt-0">
-              <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {[
-                  {
-                    title: "The Future of Quantum Computing",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                  {
-                    title: "5G Technology and Its Impact",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                  {
-                    title: "Blockchain Beyond Cryptocurrency",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                  {
-                    title: "AR/VR Development in 2025",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="group overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md"
-                  >
-                    <div className="relative aspect-video overflow-hidden">
-                      <Image
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.title}
-                        width={300}
-                        height={200}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-bold">{item.title}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        Exploring the cutting-edge technologies shaping our
-                        future
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-            <TabsContent value="electronics" className="mt-0">
-              <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {[
-                  {
-                    title: "OLED vs Mini-LED Displays",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                  {
-                    title: "Next-Gen Gaming Consoles",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                  {
-                    title: "Wireless Charging Evolution",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                  {
-                    title: "Smart Wearables in Healthcare",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="group overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md"
-                  >
-                    <div className="relative aspect-video overflow-hidden">
-                      <Image
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.title}
-                        width={300}
-                        height={200}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-bold">{item.title}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        The latest in electronic innovations and consumer
-                        technology
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-            <TabsContent value="gadgets" className="mt-0">
-              <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {[
-                  {
-                    title: "Smart Home Gadgets Worth Buying",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                  {
-                    title: "Fitness Trackers Comparison",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                  {
-                    title: "Portable Power Stations Review",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                  {
-                    title: "Innovative Kitchen Gadgets",
-                    image: "https://placehold.co/200x300/png",
-                  },
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="group overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md"
-                  >
-                    <div className="relative aspect-video overflow-hidden">
-                      <Image
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.title}
-                        width={300}
-                        height={200}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-bold">{item.title}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        Cool gadgets that make everyday life easier and more
-                        enjoyable
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </section> */}
       </main>
     </div>
   );

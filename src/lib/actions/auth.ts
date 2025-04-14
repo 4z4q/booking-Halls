@@ -20,11 +20,11 @@ export const signInWithCredentials = async (
   } catch (error: Error | unknown) {
     console.log(
       `Error creating user: ${
-        error instanceof Error ? error.message : "Unknown error"
+        error instanceof Error ? error.message : "خطاء غير متوقع يرجئ اعاده المحاوله"
       }`
     );
   }
-  return { success: false, error: "Unknown error" };
+  return { success: false, error: "خطاء غير متوقع يرجئ اعاده المحاوله" };
 };
 
 export const signUp = async ({

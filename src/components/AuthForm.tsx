@@ -51,9 +51,7 @@ const AuthForm = <T extends FieldValues>({
     const result = await onSubmit(data);
     if (result?.success) {
       toast.success("تم بنجاح", {
-        description: isSignIn
-          ? "مرحباً بعودتك!"
-          : "تم إنشاء الحساب بنجاح",
+        description: isSignIn ? "مرحباً بعودتك!" : "تم إنشاء الحساب بنجاح",
       });
       router.push("/");
     } else {
@@ -65,9 +63,9 @@ const AuthForm = <T extends FieldValues>({
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen w-full">
       {/* Left Section */}
-      <div className="relative hidden  p-8 lg:block">
+      <div className="relative hidden  p-8 lg:block w-full ">
         <div className="h-full w-full overflow-hidden rounded-[40px] bg-gradient-to-b from-purple-400 via-purple-600 to-black">
           <div className="flex flex-col items-center justify-center h-full px-8 text-center text-white">
             <div className="mb-8">
@@ -142,14 +140,18 @@ const AuthForm = <T extends FieldValues>({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="capitalize text-white">
-                            {FIELD_NAMES[field.name as keyof typeof FIELD_NAMES] || field.name}
+                            {FIELD_NAMES[
+                              field.name as keyof typeof FIELD_NAMES
+                            ] || field.name}
                           </FormLabel>
                           <FormControl>
                             <Input
                               {...field}
                               className=" text-white bg-gray-900 border-gray-800 placeholder:text-gray-400"
                               type={
-                                FIELD_TYPES[field.name as keyof typeof FIELD_TYPES]
+                                FIELD_TYPES[
+                                  field.name as keyof typeof FIELD_TYPES
+                                ]
                               }
                             />
                           </FormControl>

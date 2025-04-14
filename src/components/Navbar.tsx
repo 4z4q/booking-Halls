@@ -64,7 +64,7 @@ const Navbar = ({ session }: { session: Session }) => {
               title="تسجيل الدخول"
               variant="ghost"
               size="icon"
-              onClick={() => router.push(session ? "/profile" : "/login")}
+              onClick={() => router.push(session ? "/profile" : "/sign-in")}
             >
               {session ? (
                 <User className="h-5 w-5" />

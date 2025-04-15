@@ -9,7 +9,6 @@ import {
   ShoppingCart,
   LogIn,
   FileText,
-  QrCode,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -26,7 +25,7 @@ const Navbar = ({ session }: { session: Session }) => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex flex-col">
+      <div className=" container px-4  flex flex-col">
         <div className="flex h-16 items-center justify-between">
           {/* Logo & Navigation */}
           <div className="hidden md:flex items-center gap-6 whitespace-nowrap">
@@ -69,17 +68,25 @@ const Navbar = ({ session }: { session: Session }) => {
               size="icon"
               onClick={() => router.push(session ? "/profile" : "/sign-in")}
             >
-              {session ? <User className="h-5 w-5" /> : <LogIn className="h-5 w-5" />}
+              {session ? (
+                <User className="h-5 w-5" />
+              ) : (
+                <LogIn className="h-5 w-5" />
+              )}
             </Button>
           </div>
 
-          {/* أدوات إضافية - Desktop */}
-          <div className="md:hidden flex items-center gap-2 z-10">
-            <Button variant="ghost" size="icon" className="rounded-full" aria-label="سجل العمليات">
-              <FileText className="h-6 w-6" />
+          <div className="flex items-center gap-2 md:hidden z-10">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="سلة المشتريات"
+              className=" sm:flex"
+            >
+              <ShoppingCart className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="rounded-full" aria-label="ماسح QR">
-              <QrCode className="h-6 w-6" />
+            <Button variant="ghost" size="icon" aria-label="الإشعارات">
+              <Bell className="h-5 w-5" />
             </Button>
           </div>
 
@@ -89,7 +96,7 @@ const Navbar = ({ session }: { session: Session }) => {
           {/* Mobile Icons */}
           <div className="md:hidden flex items-center gap-2 z-10">
             <Button variant="ghost" size="icon" aria-label="الإشعارات">
-              <Bell size={24} />
+              <FileText size={24} />
             </Button>
             <Button
               onClick={toggleMobileMenu}
@@ -103,8 +110,29 @@ const Navbar = ({ session }: { session: Session }) => {
           </div>
         </div>
 
+        {/* Mobile bottom navigation */}
+        <nav className="md:hidden border-t pt-2 pb-3">
+          <ul className="flex items-center justify-around">
+            {NAV_LINKS.map((item) => (
+              <li key={item.key}>
+                <Link
+                  href={item.href}
+                  className="text-sm font-medium hover:text-primary transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         {/* القائمة الجانبية للجوال */}
-        <MobileNav isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />
+        <MobileNav
+          isOpen={isMobileMenuOpen}
+          onClose={closeMobileMenu}
+          session={session}
+        />
       </div>
     </header>
   );
@@ -113,28 +141,46 @@ const Navbar = ({ session }: { session: Session }) => {
 const MobileNav = ({
   isOpen,
   onClose,
+  session,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  session: Session | null;
 }) => {
+  const router = useRouter();
+
   return (
     <div
-      className={`md:hidden fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-background/95 backdrop-blur transform transition-transform ease-in-out duration-300 ${
+      className={`md:hidden fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-background/95 backdrop-blur transition-transform duration-300 ease-in-out ${
         isOpen ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <ul className="flex flex-col items-center justify-center h-full gap-6">
-        {NAV_LINKS.map((item) => (
-          <li
-            key={item.key}
-            className="cursor-pointer hover:text-primary transition-all duration-300 ease-in-out font-medium text-lg"
-          >
-            <Link href={item.href} onClick={onClose}>
-              {item.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="flex flex-col items-center justify-center h-full gap-6 text-center">
+        {session ? (
+          <>
+            <p className="text-lg font-medium">
+              مرحبًا، {session?.user?.name || "المستخدم"}
+            </p>
+            <Button onClick={() => router.push("/profile")}>
+              الملف الشخصي
+            </Button>
+            <Button onClick={() => router.push("/orders")}>حجوزاتي</Button>
+            <Button variant="outline" onClick={onClose}>
+              إغلاق
+            </Button>
+          </>
+        ) : (
+          <>
+            <p className="text-lg font-medium">مرحبًا بك في لحظات</p>
+            <Button onClick={() => router.push("/sign-in")}>
+              تسجيل الدخول
+            </Button>
+            <Button variant="outline" onClick={onClose}>
+              إغلاق
+            </Button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

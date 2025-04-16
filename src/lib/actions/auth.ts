@@ -37,7 +37,7 @@ export const signUp = async ({
     const response = await fetch(
       `${process.env.BASE_URL_SERVER}/user/register`,
       {
-        method: "POST",   
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },

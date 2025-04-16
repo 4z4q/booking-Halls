@@ -25,6 +25,8 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>;
@@ -41,6 +43,7 @@ const AuthForm = <T extends FieldValues>({
 }: Props<T>) => {
   const isSignIn = type === "SIGN_IN";
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form: UseFormReturn<T> = useForm({
     resolver: zodResolver(schema),
@@ -48,18 +51,27 @@ const AuthForm = <T extends FieldValues>({
   });
 
   const handleSubmit: SubmitHandler<T> = async (data) => {
+    setIsLoading(true);
     const result = await onSubmit(data);
-    if (result?.success) {
-      toast.success("تم بنجاح", {
-        description: isSignIn ? "مرحباً بعودتك!" : "تم إنشاء الحساب بنجاح",
+    try {
+      if (result?.success) {
+        toast.success("تم بنجاح", {
+          description: isSignIn ? "مرحباً بعودتك!" : "تم إنشاء الحساب بنجاح",
+        });
+        router.push("/");
+      } else {
+        toast.error("حدث خطأ", {
+          description: result?.error ?? "يرجى المحاولة لاحقاً",
+        });
+      }
+      return result;
+    } catch {
+      toast.error("حدث خطاء", {
+        description: "يرجى المحاولة لاحقاً",
       });
-      router.push("/");
-    } else {
-      toast.error("حدث خطأ", {
-        description: result?.error ?? "يرجى المحاولة لاحقاً",
-      });
+    } finally {
+      setIsLoading(false);
     }
-    return result;
   };
 
   return (
@@ -164,8 +176,18 @@ const AuthForm = <T extends FieldValues>({
                 <Button
                   type="submit"
                   className="w-full h-12 text-black bg-white hover:bg-gray-100"
+                  disabled={isLoading}
                 >
-                  {isSignIn ? "دخول" : "إنشاء الحساب"}
+                  {isLoading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <span>جاري التحميل</span>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    </div>
+                  ) : isSignIn ? (
+                    "دخول"
+                  ) : (
+                    "إنشاء الحساب"
+                  )}
                 </Button>
               </form>
             </Form>

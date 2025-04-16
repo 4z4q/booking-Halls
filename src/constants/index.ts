@@ -1,12 +1,10 @@
-// القائمة الرئيسية
 export const NAV_LINKS = [
   { href: "/", key: "home", label: "الصفحة الرئيسية" },
   { href: "/about", key: "about", label: "حول" },
-  { href: "#trending-reviews", key: "services", label: "الخدمات" },
+  { href: "/services", key: "services", label: "الخدمات" },
   { href: "/contact", key: "contact_us", label: "الدعم" },
 ];
 
-// قسم المعسكر
 export const PEOPLE_URL = [
   "/person.jpg",
   "/person.jpg",
@@ -14,7 +12,6 @@ export const PEOPLE_URL = [
   "/person.jpg",
 ];
 
-// قسم الميزات
 export const FEATURES = [
   {
     title: "خرائط حقيقية تعمل بدون إنترنت",
@@ -46,7 +43,6 @@ export const FEATURES = [
   },
 ];
 
-// قسم التذييل
 export const FOOTER_LINKS = [
   {
     title: "المزيد",

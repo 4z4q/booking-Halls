@@ -108,21 +108,20 @@ export function BookingModal({
 
   // Reset form when dialog closes
   const handleDialogChange = async (open: boolean) => {
-    toast.info("يجب تسجيل الدخول قبل الحجز ", {
-      action:{
-        label:"تسجيل الدخول",
-        onClick: () => redirect("/sign-in")
+    if (open) {
+      const response = await fetch("/api/check-auth");
+      if (!response.ok) {
+        toast.info("يجب تسجيل الدخول قبل الحجز ", {
+          action: {
+            label: "تسجيل الدخول",
+            onClick: () => redirect("/sign-in"),
+          },
+        });
+        return;
       }
-    });
+    }
 
-    // if (open) {
-    //   const response = await fetch("/api/check-auth");
-    //   if (!response.ok) {
-    //     redirect("/sign-in");
-    //   }
-    // }
-
-    // setIsOpen(open);
+    setIsOpen(open);
 
     if (!open) {
       // Reset form after a short delay to avoid visual glitches

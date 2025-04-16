@@ -140,16 +140,27 @@ export default function Home() {
         </Carousel>
 
         {/* Trending Reviews Section */}
-        <div className="min-h-screen  mb-12" id="trending-reviews">
+        <section className="min-h-screen  mb-12" id="trending-reviews">
           <div className="px-0">
             {/* Page Header */}
-            <div className="mb-12 text-center">
+            <div className="mb-12 text-center group">
               <h1 className="text-4xl font-bold tracking-tight mb-4">
                 خدمات المناسبات
               </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto border-b border-muted-foreground pb-2 rounded">
-                اختر من بين مجموعة متنوعة من الخدمات لجعل مناسبتك لا تُنسى
-              </p>
+              <div className="relative inline-block">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto pb-3">
+                  اختر الخدمة، واحجز بكل سهولة وراحة
+                </p>
+                <span className="absolute left-1/2 -bottom-1 transform -translate-x-1/2 w-20 h-[3px] bg-purple-600 rounded-full transition-all duration-300 group-hover:w-full" />
+              </div>
+            </div>
+
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-bold"> التصنيفات</h2>
+              <Button variant="outline" className="gap-1">
+                جميع التصنيفات
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
             </div>
 
             {/* Categories Grid */}
@@ -204,18 +215,22 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
         {/* What's New Today Section */}
         <section className="mb-12">
-          <div className="mb-12 text-center">
+          <div className="mb-12 text-center group">
             <h1 className="text-4xl font-bold tracking-tight mb-4">
-              أستمتع باخر العروض
+              عروض اليوم حصرياً لك{" "}
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto border-b border-muted-foreground pb-2 rounded">
-              اختر من بين مجموعة متنوعة من العروض لجعل مناسبتك لا تُنسى
-            </p>
+            <div className="relative inline-block">
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto pb-3">
+                استفد من الخصومات المحدودة قبل انتهائها{" "}
+              </p>
+              <span className="absolute left-1/2 -bottom-1 transform -translate-x-1/2 w-20 h-[3px] bg-purple-600 rounded-full transition-all duration-300 group-hover:w-full" />
+            </div>
           </div>
+
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-bold">عروض اليوم</h2>
             <Button variant="outline" className="gap-1">

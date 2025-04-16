@@ -3,8 +3,7 @@ export const NAV_LINKS = [
   { href: "/", key: "home", label: "الصفحة الرئيسية" },
   { href: "/about", key: "about", label: "حول" },
   { href: "#trending-reviews", key: "services", label: "الخدمات" },
-  { href: "/", key: "support", label: "الدعم" },
-  { href: "/contact", key: "contact_us", label: "تواصل معنا" },
+  { href: "/contact", key: "contact_us", label: "الدعم" },
 ];
 
 // قسم المعسكر

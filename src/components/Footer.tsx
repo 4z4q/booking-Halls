@@ -12,10 +12,11 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="relative h-8 w-8">
-                <div className="absolute h-8 w-8 rounded-full bg-purple-600"></div>
-                <div className="absolute h-6 w-6 translate-x-1 translate-y-1 rounded-full bg-blue-500"></div>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-blue-500">
+                  <span className="text-sm font-bold text-white">ع</span>
+                </div>
               </div>
-              <span className="text-xl font-bold">عرسك علينا</span>
+              <span className="text-xl font-bold">لحظات</span>
             </div>
             <p className="text-sm text-muted-foreground">
               لأن لحظات الفرح تستحق الأفضل، نحن هنا لنصنع لك ذكريات لا تُنسى.
@@ -253,7 +254,7 @@ const Footer = () => {
         <div className="mt-8 border-t pt-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-center text-sm text-muted-foreground">
-              عرسك علينا {new Date().getFullYear()} كل الحقوق محفوظة.
+               لحظات {new Date().getFullYear()} كل الحقوق محفوظة.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
               <Link href="#" className="hover:text-primary">

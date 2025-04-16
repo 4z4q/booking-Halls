@@ -1,7 +1,4 @@
 "use client";
-
-import type React from "react";
-
 import { useState } from "react";
 import { format, addMonths, isBefore, isAfter } from "date-fns";
 import { ar } from "date-fns/locale"; // Fixed import - removed 'se'
@@ -16,12 +13,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 interface BookingModalProps {
   serviceName: string;
@@ -109,8 +107,23 @@ export function BookingModal({
   };
 
   // Reset form when dialog closes
-  const handleDialogChange = (open: boolean) => {
-    setIsOpen(open);
+  const handleDialogChange = async (open: boolean) => {
+    toast.info("يجب تسجيل الدخول قبل الحجز ", {
+      action:{
+        label:"تسجيل الدخول",
+        onClick: () => redirect("/sign-in")
+      }
+    });
+
+    // if (open) {
+    //   const response = await fetch("/api/check-auth");
+    //   if (!response.ok) {
+    //     redirect("/sign-in");
+    //   }
+    // }
+
+    // setIsOpen(open);
+
     if (!open) {
       // Reset form after a short delay to avoid visual glitches
       setTimeout(() => {
@@ -169,45 +182,17 @@ export function BookingModal({
             <div className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="date">التاريخ</Label>
-                {/* <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        "w-full justify-end font-normal",
-                        !date && "text-muted-foreground"
-                      )}
-                    >
-                      {date
-                        ? format(date, "yyyy/MM/dd", { locale: ar })
-                        : "اختر تاريخ"}
-                      <CalendarIcon className="ml-2 h-4 w-4" />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0">
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={(selectDate) => {
-                        console.log(selectDate);
-                        setDate(selectDate);
-                        // لتفادي إغلاق الـ Popover عند اختيار التاريخ
-                      }}
-                      className="rounded-md border"
-                    />
-                  </PopoverContent>
-                </Popover> */}
 
                 <div className="relative mb-4">
                   <input
                     type="date"
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="peer w-full appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 pr-10 text-gray-700 shadow-sm focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     value={date ? format(date, "yyyy-MM-dd") : ""}
                     onChange={handleDateChange}
                     min={format(today, "yyyy-MM-dd")}
                     max={format(maxDate, "yyyy-MM-dd")}
                   />
-                  <i className="fas fa-calendar-alt absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400"></i>
+                  <i className="fas fa-calendar-alt absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 peer-focus:text-purple-500 pointer-events-none"></i>
                 </div>
               </div>
 

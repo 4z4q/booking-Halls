@@ -15,6 +15,7 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { NAV_LINKS } from "@/constants";
 import { Session } from "next-auth";
+import { ModeToggle } from "./ModeToggle";
 
 const Navbar = ({ session }: { session: Session }) => {
   const router = useRouter();
@@ -59,9 +60,7 @@ const Navbar = ({ session }: { session: Session }) => {
             <Button variant="ghost" size="icon" aria-label="سلة المشتريات">
               <ShoppingCart className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" aria-label="الإشعارات">
-              <Bell className="h-5 w-5" />
-            </Button>
+            <ModeToggle />
             <Button
               aria-label={session ? "الملف الشخصي" : "تسجيل الدخول"}
               variant="ghost"
@@ -155,26 +154,43 @@ const MobileNav = ({
         isOpen ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="flex flex-col items-center justify-center h-full gap-6 text-center">
+      <div className="flex flex-col items-center justify-center h-full gap-6 text-center px-4">
         {session ? (
           <>
-            <p className="text-lg font-medium">
-              مرحبًا، {session?.user?.name || "المستخدم"}
-            </p>
-            <Button onClick={() => router.push("/profile")}>
-              الملف الشخصي
-            </Button>
-            <Button onClick={() => router.push("/orders")}>حجوزاتي</Button>
+            <div className="bg-white rounded-2xl shadow-lg p-4 w-full max-w-xs text-right">
+              <p className="text-lg font-semibold text-primary mb-2">
+                مرحبًا، {session.user?.name || "المستخدم"}
+              </p>
+              <p className="text-sm text-muted-foreground mb-4">
+                {session.user?.email}
+              </p>
+              <div className="flex flex-col gap-2">
+                <Button onClick={() => router.push("/profile")}>
+                  الملف الشخصي
+                </Button>
+                <Button onClick={() => router.push("/orders")}>حجوزاتي</Button>
+              </div>
+            </div>
             <Button variant="outline" onClick={onClose}>
               إغلاق
             </Button>
           </>
         ) : (
           <>
-            <p className="text-lg font-medium">مرحبًا بك في لحظات</p>
-            <Button onClick={() => router.push("/sign-in")}>
-              تسجيل الدخول
-            </Button>
+            <div className="bg-white rounded-2xl shadow-lg p-4 w-full max-w-xs text-center">
+              <p className="text-lg font-semibold text-primary mb-2">
+                مرحبًا بك في لحظات
+              </p>
+              <p className="text-sm text-muted-foreground mb-4">
+                قم بإنشاء حساب لتتمكن من مشاهدة جميع الخدمات، الأسعار،
+                التقييمات، والمزايا الخاصة!
+              </p>
+              <div className="flex flex-col gap-2">
+                <Button onClick={() => router.push("/sign-in")}>
+                  تسجيل الدخول / إنشاء حساب
+                </Button>
+              </div>
+            </div>
             <Button variant="outline" onClick={onClose}>
               إغلاق
             </Button>

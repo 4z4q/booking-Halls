@@ -14,11 +14,7 @@ export default async function RootLayout({
   return (
     <>
       <Navbar session={session} />
-      <div className="bg-muted py-6  ">
-        <main className="container relative px-4 overflow-hidden bg-white">
-          {children}
-        </main>
-      </div>
+      <div className="bg-muted py-6">{children}</div>
       <Footer />
     </>
   );

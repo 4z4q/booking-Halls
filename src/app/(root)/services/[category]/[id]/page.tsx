@@ -151,13 +151,12 @@ export default async function filterFeaturedDetailsPage({
                 <span>{service.rating}</span>
               </div>
             </div>
-            <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600">
+            <Button className="w-full  bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600">
               <Calendar className="ml-2 h-4 w-4" /> التحقق من التوفر
             </Button>
           </div>
         </div>
 
-        {/* التبويبات والمحتوى */}
         <div className="grid gap-8 md:grid-cols-[1fr_300px]">
           <div>
             <Tabs defaultValue="details" dir="rtl">

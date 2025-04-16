@@ -65,8 +65,8 @@ export default function Home() {
   const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
 
   return (
-    <div className="min-h-screen bg-background ">
-      <main className=" py-[16px]">
+    <div className="min-h-screen bg-background container ">
+      <main className="py-[16px]">
         {/* Hero Section */}
         <Carousel
           plugins={[plugin.current]}
@@ -112,7 +112,7 @@ export default function Home() {
             ].map((item, index) => (
               <CarouselItem
                 key={index}
-                className="relative overflow-hidden rounded-xl w-[90%] sm:w-[320px] md:w-[400px] lg:w-[500px] h-[180px] sm:h-[200px] md:h-[250px] lg:h-[280px] mx-auto"
+                className="relative overflow-hidden rounded-[6px] w-[90%] sm:w-[320px] md:w-[400px] lg:w-[500px] h-[180px] sm:h-[200px] md:h-[250px] lg:h-[280px] mx-auto"
                 dir="rtl"
               >
                 <Image
@@ -141,7 +141,7 @@ export default function Home() {
 
         {/* Trending Reviews Section */}
         <div className="min-h-screen  mb-12" id="trending-reviews">
-          <div className=" px-0">
+          <div className="px-0">
             {/* Page Header */}
             <div className="mb-12 text-center">
               <h1 className="text-4xl font-bold tracking-tight mb-4">
@@ -153,22 +153,21 @@ export default function Home() {
             </div>
 
             {/* Categories Grid */}
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 sm:grid-cols-2  lg:grid-cols-3">
               {allowedCategories.map((cat) => (
                 <Link
                   key={cat.id}
                   href={`/services/${cat.category}`}
                   className="block"
                 >
-                  <div className="group overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md h-full">
-                    <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="group overflow-hidden rounded-[6px] border bg-card shadow-sm transition-all hover:shadow-md h-full">
+                    <div className="relative aspect-[1] sm:aspect-[3/2]  overflow-hidden">
                       <Image
                         src={
                           getCategoryImage(cat.category) || "/placeholder.svg"
                         }
                         alt={getCategoryNameInArabic(cat.category)}
-                        width={600}
-                        height={450}
+                        fill={true}
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
@@ -226,7 +225,7 @@ export default function Home() {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="md:col-span-1">
-              <div className="group overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
+              <div className="group overflow-hidden rounded-[6px] border bg-card shadow-sm transition-all hover:shadow-md">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src="/pexels-solliefoto-313702.jpg"

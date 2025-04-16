@@ -6,7 +6,8 @@ export const signUpSchema = z.object(
     lastName: z.string().min(3),
     email: z.string().email(),
     password: z.string().min(6),
-    role: z.enum(["client", "vendor", "admin"]),
+    // role: z.enum(["client", "vendor", "admin"]),
+    // createdAt: z.date(),
   },
   {
     required_error: "All fields are required",

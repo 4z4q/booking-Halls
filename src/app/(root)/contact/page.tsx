@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-hidden">
       {/* Hero Section */}
       <section className="w-screen relative left-1/2 right-1/2 mx-[-50vw] bg-gradient-to-b from-purple-600 to-blue-500 text-white overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>

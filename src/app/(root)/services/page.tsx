@@ -1,10 +1,9 @@
 "use client";
-
 import { useRef, useState } from "react";
-import { SearchFilter } from "./search-filter";
-import { PackageCard } from "./package-card";
-import { ServiceCard } from "./service-card";
-import { ServiceTypeLink } from "./service-type-link";
+import { SearchFilter } from "../../../components/services-components/search-filter";
+import { PackageCard } from "../../../components/services-components/package-card";
+import { ServiceCard } from "../../../components/services-components/service-card";
+import { ServiceTypeLink } from "../../../components/services-components/service-type-link";
 import {
   Diamond,
   Flame,
@@ -20,6 +19,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -27,7 +28,6 @@ export default function ServicesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
 
-  // بيانات الباقات المتاحة
   const packages = [
     {
       id: 1,
@@ -76,7 +76,6 @@ export default function ServicesPage() {
     },
   ];
 
-  // الخدمات الشائعة
   const popularServices = [
     {
       id: 1,
@@ -135,7 +134,6 @@ export default function ServicesPage() {
     },
   ];
 
-  // أنواع الخدمات للتنقل
   const serviceTypes = [
     {
       id: 1,
@@ -175,7 +173,6 @@ export default function ServicesPage() {
     },
   ];
 
-  // تصفية الخدمات حسب البحث والتحديد
   const filteredServices = popularServices.filter((service) => {
     const matchesSearch =
       service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -256,11 +253,37 @@ export default function ServicesPage() {
             <Flame className="h-6 w-6 text-primary mr-2" />
           </div>
           {filteredServices.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredServices.map((service) => (
-                <ServiceCard key={service.id} service={service} />
-              ))}
-            </div>
+            <>
+              <div className="md:hidden">
+                <Carousel
+                  opts={{
+                    align: "start",
+                    loop: true,
+                  }}
+                  className="w-full"
+                  plugins={[plugin.current]}
+                  onMouseEnter={plugin.current.stop}
+                  onMouseLeave={plugin.current.reset}
+                  dir="ltr"
+                >
+                  <CarouselContent className="">
+                    {filteredServices.map((service) => (
+                      <CarouselItem key={service.id} className=" ">
+                        <ServiceCard service={service} />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselNext className="right-[-16px]" />
+                  <CarouselPrevious className="left-[-16px]" />
+                </Carousel>
+              </div>
+
+              <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredServices.map((service) => (
+                  <ServiceCard key={service.id} service={service} />
+                ))}
+              </div>
+            </>
           ) : (
             <div className="text-center py-12">
               <p className="text-muted-foreground text-lg">

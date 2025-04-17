@@ -25,8 +25,8 @@ export function SearchFilter({ searchQuery, setSearchQuery, selectedFilter, setS
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      <Select value={selectedFilter} onValueChange={setSelectedFilter}>
-        <SelectTrigger className="w-full md:w-[180px]">
+      <Select value={selectedFilter} onValueChange={setSelectedFilter} dir="rtl" >
+        <SelectTrigger className="w-full md:w-[180px] text-center ">
           <SelectValue placeholder="Filter by type" />
         </SelectTrigger>
         <SelectContent>

@@ -41,7 +41,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info & Form */}
-      <section className=" py-16">
+      <section className="container py-16">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Contact Info */}
           <div className="md:col-span-1">

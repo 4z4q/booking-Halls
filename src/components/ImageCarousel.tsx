@@ -8,34 +8,34 @@ import {
 import Image from "next/image";
 
 export function CarouselSize({ gallery }: { gallery: string[] }) {
+  const itemBasis = gallery.length > 3 ? "33.33%" : `${100 / gallery.length}%`;
   return (
-<Carousel
-  opts={{ align: "start", loop: true }}
-  className="w-full mb-8 space-y-4"
-  dir="ltr"
->
-  <CarouselContent>
-    {gallery.map((src, index) => (
-      <CarouselItem
-        key={index}
-        className="basis-[100%] md:basis-1/3 lg:basis-1/4"
-      >
-        <div className="p-1  md:h-[250px] lg:h-[300px]">
-          <Image
-            src={src}
-            width={1200}
-            height={600}
-            alt={`Slide ${index + 1}`}
-            className="rounded-md object-cover w-full h-full"
-          />
-        </div>
-      </CarouselItem>
-    ))}
-  </CarouselContent>
-  <CarouselPrevious className="left-2" />
-  <CarouselNext className="right-2" />
-</Carousel>
-
+    <Carousel
+      opts={{ align: "start", loop: true }}
+      className="w-full mb-8 space-y-4"
+      dir="ltr"
+    >
+      <CarouselContent>
+        {gallery.map((src, index) => (
+          <CarouselItem
+            key={index}
+            className={`transition-all duration-700 ease-in-out ${gallery.length > 3 ? `md:basis-1/3` : `md:basis-[calc(${itemBasis})]`}`}
+          >
+            <div className="p-1  md:h-[250px] lg:h-[300px]">
+              <Image
+                src={src}
+                width={1200}
+                height={600}
+                alt={`Slide ${index + 1}`}
+                className="rounded-md object-cover w-full h-full"
+              />
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="left-2" />
+      <CarouselNext className="right-2" />
+    </Carousel>
   );
 }
 

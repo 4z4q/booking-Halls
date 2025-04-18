@@ -157,10 +157,12 @@ export default function Home() {
 
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-2xl font-bold"> التصنيفات</h2>
-              <Button variant="outline" className="gap-1">
-                جميع التصنيفات
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
+              <Link href={"/services"}>
+                <Button variant="outline" className="gap-1">
+                  جميع التصنيفات
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
 
             {/* Categories Grid */}

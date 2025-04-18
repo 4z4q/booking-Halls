@@ -39,7 +39,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { AMENITIES, CAPACITIES, LOCATIONS } from "@/constants";
+import { CAPACITIES, LOCATIONS } from "@/constants";
 import { BookingModal } from "./booking-model";
 
 interface FilterServices {
@@ -64,17 +64,25 @@ function filterServices(
   services: FilterServices[],
   searchValue: string,
   location: string,
-  price: number
+  price: number,
+  capacity: string
 ): FilterServices[] {
   return services.filter((item) => {
     const matchName = searchValue
       ? item.name.toLowerCase().includes(searchValue.toLowerCase())
       : true;
+
     const matchLocation = location
       ? item.location.toLowerCase().includes(location.toLowerCase())
       : true;
+
     const matchPrice = price ? item.price <= price : true;
-    return matchName && matchLocation && matchPrice;
+
+    const matchesCapacity = capacity
+      ? (item.capacity ?? 0) <= parseInt(capacity)
+      : true;
+
+    return matchName && matchLocation && matchPrice && matchesCapacity;
   });
 }
 
@@ -86,26 +94,59 @@ export const ProductsFilter = ({
   const [searchValue, setSearchValue] = useQueryState("name", {
     defaultValue: "",
   });
+
   const [location, setLocation] = useQueryState("location", {
     defaultValue: "",
   });
+
   const [price, setPrice] = useQueryState(
     "price",
     parseAsInteger.withDefault(0)
   );
 
-  const results = filterServices(
-    filteredServices,
-    searchValue,
-    location,
-    price
-  );
+  const [capacity, setCapacity] = useQueryState("capacity", {
+    defaultValue: "",
+  });
 
   const handleResetFilters = () => {
     setSearchValue("");
     setLocation("");
     setPrice(0);
+    setCapacity("");
   };
+
+  const [sortBy, setSortBy] = useQueryState("sortBy", {
+    defaultValue: "recommended",
+  });
+
+  const filtered = filterServices(
+    filteredServices,
+    searchValue,
+    location,
+    price,
+    capacity
+  );
+
+  function sortServices(
+    services: FilterServices[],
+    sortBy: string
+  ): FilterServices[] {
+    const sorted = [...services]; // ما نعدل الأصل مباشرة
+    switch (sortBy) {
+      case "price-low":
+        return sorted.sort((a, b) => a.price - b.price);
+      case "price-high":
+        return sorted.sort((a, b) => b.price - a.price);
+      case "capacity":
+        return sorted.sort((a, b) => (b.capacity ?? 0) - (a.capacity ?? 0));
+      case "rating":
+        return sorted.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+      default:
+        return sorted;
+    }
+  }
+
+  const results = sortServices(filtered, sortBy);
 
   return (
     <div className="mb-8 grid gap-6 md:grid-cols-[280px_1fr]">
@@ -126,19 +167,26 @@ export const ProductsFilter = ({
               </SheetDescription>
             </SheetHeader>
             <div className="mt-6 px-4">
+              {/* Checkbox Filter */}
               <CheckboxFilter
                 title="الموقع"
                 options={LOCATIONS}
                 prefix="mobile-location"
-                setLocation={setLocation}
+                onChange={setLocation}
+                value={location}
               />
+              {/* Price Filter */}
               <PriceRangeFilter price={price} setPrice={setPrice} />
-              <SelectFilter title="سعة القاعة" options={CAPACITIES} />
-              <CheckboxFilter
-                title="المرافق"
-                options={AMENITIES}
-                prefix="mobile-amenity"
-              />
+
+              {/* Select Size Filter */}
+
+              {category === "halls" && (
+                <SelectFilter
+                  title="سعة القاعة"
+                  options={CAPACITIES}
+                  setCapacity={setCapacity}
+                />
+              )}
               <Button className="w-full mb-6">تطبيق الفلاتر</Button>
             </div>
           </SheetContent>
@@ -163,15 +211,20 @@ export const ProductsFilter = ({
           title="الموقع"
           options={LOCATIONS}
           prefix="desktop-location"
-          setLocation={setLocation}
+          value={location}
+          onChange={setLocation}
         />
+
         <PriceRangeFilter price={price} setPrice={setPrice} />
-        <SelectFilter title="سعة القاعة" options={CAPACITIES} />
-        <CheckboxFilter
-          title="المرافق"
-          options={AMENITIES}
-          prefix="desktop-amenity"
-        />
+
+        {category === "halls" && (
+          <SelectFilter
+            title="سعة القاعة"
+            options={CAPACITIES}
+            setCapacity={setCapacity}
+          />
+        )}
+
         <Button className="w-full">تطبيق الفلاتر</Button>
       </div>
 
@@ -197,8 +250,13 @@ export const ProductsFilter = ({
                 عرض {results.length} خدمة
               </p>
             </div>
-            <Select defaultValue="recommended">
-              <SelectTrigger className="w-[180px]">
+            <Select
+              defaultValue="recommended"
+              dir="rtl"
+              onValueChange={setSortBy}
+              value={sortBy}
+            >
+              <SelectTrigger className="w-[200px]">
                 <SelectValue placeholder="ترتيب حسب" />
               </SelectTrigger>
               <SelectContent>
@@ -209,7 +267,10 @@ export const ProductsFilter = ({
                 <SelectItem value="price-high">
                   السعر: من الأعلى إلى الأقل
                 </SelectItem>
-                <SelectItem value="capacity">السعة</SelectItem>
+                {/* Remove capacity filter for all other categories */}
+                {category === "halls" && (
+                  <SelectItem value="capacity">السعة</SelectItem>
+                )}
                 <SelectItem value="rating">التقييم</SelectItem>
               </SelectContent>
             </Select>
@@ -219,7 +280,7 @@ export const ProductsFilter = ({
             {results.map((hall) => (
               <Card
                 key={hall.id}
-                className="overflow-hidden transition-all hover:shadow-lg"
+                className="overflow-hidden transition-all hover:shadow-lg pt-0"
               >
                 <div className="aspect-video w-full overflow-hidden">
                   <Image

@@ -68,7 +68,7 @@ export default async function HallsPage({
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container px-4 py-6 md:py-8">
+      <div className="container  py-6 md:py-8">
         {/* Page Header */}
         <div className="mb-8 text-right">
           <h1 className="text-2xl font-bold tracking-tight md:text-3xl">

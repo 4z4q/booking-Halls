@@ -13,8 +13,8 @@ export default function Loading() {
 
             {/* Search and filter skeleton */}
             <div className="flex flex-col md:flex-row gap-4">
-              <Skeleton className="h-10 flex-grow" />
-              <Skeleton className="h-10 w-full md:w-[180px]" />
+              <Skeleton className="h-10 flex-grow text-white "  />
+              <Skeleton className="h-10 w-full md:w-[180px] text-white" />
               <Skeleton className="h-10 w-24" />
             </div>
           </div>

@@ -6,16 +6,18 @@ export const CheckboxFilter = ({
   title,
   options,
   prefix,
-  setLocation,
+  value,
+  onChange,
 }: {
   title: string;
   options: string[];
   prefix: string;
-  setLocation: (value: string) => void;
+  value: string;
+  onChange: (value: string) => void;
 }) => {
   const handleCheckboxChange = (option: string) => {
     console.log(option);
-    setLocation((prev) => (prev === option ? "" : option));
+    onChange((prev) => (prev === option ? "" : option));
   };
 
   return (
@@ -27,7 +29,7 @@ export const CheckboxFilter = ({
             <Checkbox
               id={`${prefix}-${option}`}
               value={option}
-              // onCheckedChange={ handleCheckboxChange(option)}
+              checked={option === value}
               onClick={() => handleCheckboxChange(option)}
             />
             <Label className="pr-1" htmlFor={`${prefix}-${option}`}>

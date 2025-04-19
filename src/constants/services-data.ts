@@ -470,7 +470,13 @@ export const servicesData = [
     type: "photography",
     amenities: ["ألبوم صور", "تصوير جوي", "إضاءة احترافية"],
     image: "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",
-    gallery: ["/newOffers/pexels-yakup-polat-420882786-19698113.jpg",, "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",, "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",],
+    gallery: [
+      "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",
+      ,
+      "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",
+      ,
+      "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",
+    ],
     description: "صور احترافية للمناسبات السعيدة",
     availability: [
       { date: "2024-07-22", slots: ["مساء"] },
@@ -503,7 +509,13 @@ export const servicesData = [
     type: "photography",
     amenities: ["تصوير خارجي", "فلاتر احترافية", "تصوير بواسطة درون"],
     image: "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",
-    gallery: ["/newOffers/pexels-yakup-polat-420882786-19698113.jpg",, "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",, "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",],
+    gallery: [
+      "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",
+      ,
+      "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",
+      ,
+      "/newOffers/pexels-yakup-polat-420882786-19698113.jpg",
+    ],
     description: "نوثق لحظاتك بأجمل الأساليب",
     availability: [
       { date: "2024-07-24", slots: ["صباح", "مساء"] },
@@ -751,6 +763,52 @@ export const servicesData = [
   },
 ];
 
+export const servicesSortedByPriceAsc = [...servicesData].sort(
+  (a, b) => a.price - b.price
+);
+export const servicesSortedByPriceDesc = [...servicesData].sort(
+  (a, b) => b.price - a.price
+);
 
-export const servicesSortedByPriceAsc = [...servicesData].sort((a, b) => a.price - b.price);
-export const servicesSortedByPriceDesc = [...servicesData].sort((a, b) => b.price - a.price);
+export const bookings = [
+  {
+    id: "1",
+    artist: "أحمد السنيدار",
+    date: "25 إبريل 2025",
+    time: "7:00 مساءً - 10:00 مساءً",
+    location: "صنعاء، قاعة الريان",
+    price: "150,000 ريال يمني",
+    status: "pending",
+    image: "/Untitled-1.jpg", // صورة مشابهة لأحمد السنيدار
+  },
+  {
+    id: "2",
+    artist: "فيصل القاضي",
+    date: "10 مايو 2025",
+    time: "6:30 مساءً - 9:30 مساءً",
+    location: "عدن، قاعة الهلال",
+    price: "200,000 ريال يمني",
+    status: "confirmed",
+    image: "/Untitled-1.jpg", // صورة مشابهة لفيصل القاضي
+  },
+  {
+    id: "3",
+    artist: "بلقيس أحمد",
+    date: "15 مارس 2025",
+    time: "8:00 مساءً - 11:00 مساءً",
+    location: "تعز، المسرح الذهبي",
+    price: "175,000 ريال يمني",
+    status: "completed",
+    image: "/Untitled-1.jpg", // صورة مشابهة لبلقيس أحمد
+  },
+  {
+    id: "4",
+    artist: "محمد عبده",
+    date: "28 فبراير 2025",
+    time: "7:30 مساءً - 10:30 مساءً",
+    location: "حضرموت، المركز الثقافي",
+    price: "250,000 ريال يمني",
+    status: "cancelled",
+    image: "/Untitled-1.jpg", // صورة مشابهة لمحمد عبده
+  },
+];

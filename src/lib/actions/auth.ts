@@ -1,6 +1,12 @@
 "use server";
 
+import { db } from "@/database/drizzle";
 import { signIn, signOut } from "../../../auth";
+import { users } from "@/database/schema";
+import { eq } from "drizzle-orm";
+import { hash } from "bcryptjs";
+
+const SALT_ROUNDS = 10;
 
 export const signInWithCredentials = async (
   params: Pick<AuthCredentials, "email" | "password">
@@ -20,7 +26,9 @@ export const signInWithCredentials = async (
   } catch (error: Error | unknown) {
     console.log(
       `Error creating user: ${
-        error instanceof Error ? error.message : "خطاء غير متوقع يرجئ اعاده المحاوله"
+        error instanceof Error
+          ? error.message
+          : "خطاء غير متوقع يرجئ اعاده المحاوله"
       }`
     );
   }
@@ -34,27 +42,29 @@ export const signUp = async ({
   password,
 }: AuthCredentials): Promise<{ success: boolean; error?: string }> => {
   try {
-    const response = await fetch(
-      `${process.env.BASE_URL_SERVER}/user/register`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          password,
-        }),
-      }
-    );
+    const existingUser = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email));
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      return { success: false, error: data.message || "حدث خطأ أثناء التسجيل" };
+    if (existingUser.length) {
+      return {
+        success: false,
+        error: "البريد الالكتروني مستخدم من قبل",
+      };
     }
+
+    const hashPassword = await hash(password, SALT_ROUNDS);
+
+    await db.insert(users).values({
+      firstName,
+      lastName,
+      email,
+      password: hashPassword,
+    });
+
+    // This will be called after the user is created and redirects to the home page page
+    await signInWithCredentials({ email, password });
 
     return { success: true };
   } catch (error) {

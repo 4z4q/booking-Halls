@@ -10,7 +10,7 @@ import {
   UseFormReturn,
 } from "react-hook-form";
 import { ZodType } from "zod";
-
+// import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -75,67 +75,20 @@ const AuthForm = <T extends FieldValues>({
   };
 
   return (
-    <div className="flex min-h-screen w-full">
-      {/* Left Section */}
-      <div className="relative hidden  p-8 lg:block w-full ">
-        <div className="h-full w-full overflow-hidden rounded-[40px] bg-gradient-to-b from-purple-400 via-purple-600 to-black">
-          <div className="flex flex-col items-center justify-center h-full px-8 text-center text-white">
-            <div className="mb-8">
-              <h1 className="text-2xl font-semibold">حجوزاتك</h1>
-            </div>
-            <h2 className="mb-6 text-4xl font-bold">
-              {isSignIn ? "مرحبًا بعودتك!" : "ابدأ رحلتك معنا"}
-            </h2>
-            <p className="mb-12 text-lg">
-              {isSignIn
-                ? "سجّل دخولك لمتابعة الحجز"
-                : "اتبع الخطوات البسيطة لإنشاء حسابك وبدء الحجز"}
-            </p>
-
-            {!isSignIn && (
-              <div className="w-full max-w-sm space-y-4 text-start">
-                <div className="p-4 rounded-lg bg-white/10 backdrop-blur-sm">
-                  <div className="flex items-center gap-4">
-                    <span className="flex items-center justify-center w-8 h-8 text-black bg-white rounded-full">
-                      ١
-                    </span>
-                    <span className="text-lg">أنشئ حسابك</span>
-                  </div>
-                </div>
-                <div className="p-4 rounded-lg bg-white/5 backdrop-blur-sm">
-                  <div className="flex items-center gap-4">
-                    <span className="flex items-center justify-center w-8 h-8 text-white rounded-full bg-white/20">
-                      ٢
-                    </span>
-                    <span className="text-lg">اختر نوع المناسبة</span>
-                  </div>
-                </div>
-                <div className="p-4 rounded-lg bg-white/5 backdrop-blur-sm">
-                  <div className="flex items-center gap-4">
-                    <span className="flex items-center justify-center w-8 h-8 text-white rounded-full bg-white/20">
-                      ٣
-                    </span>
-                    <span className="text-lg">ابدأ الحجز</span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Right Section */}
-      <div className="flex items-center justify-center w-full p-6 bg-black lg:w-1/2">
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col items-center gap-2 text-center">
         <div className="w-full max-w-md rounded-[40px] p-12">
           <div className="max-w-sm mx-auto">
-            <h2 className="mb-2 text-3xl font-bold text-white">
-              {isSignIn ? "تسجيل الدخول" : "إنشاء حساب جديد"}
-            </h2>
-            <p className="mb-8 text-gray-400">
-              {isSignIn
-                ? "ادخل بياناتك لتسجيل الدخول."
-                : "املأ المعلومات التالية لإنشاء حسابك والبدء بالحجز."}
-            </p>
+            <div className="flex flex-col items-center gap-2 text-center mb-8">
+              <h1 className="text-2xl font-bold">
+                {isSignIn ? "مرحبًا بعودتك!" : "إنشاء حساب جديد"}
+              </h1>
+              <p className="text-balance text-sm text-muted-foreground">
+                {isSignIn
+                  ? "سجّل دخولك لمتابعة الحجز"
+                  : "املأ المعلومات التالية لإنشاء حسابك والبدء بالحجز."}
+              </p>
+            </div>
 
             <Form {...form}>
               <form
@@ -150,8 +103,8 @@ const AuthForm = <T extends FieldValues>({
                       control={form.control}
                       name={field as Path<T>}
                       render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="capitalize text-white">
+                        <FormItem className="grid gap-2">
+                          <FormLabel className="capitalize ">
                             {FIELD_NAMES[
                               field.name as keyof typeof FIELD_NAMES
                             ] || field.name}
@@ -159,11 +112,20 @@ const AuthForm = <T extends FieldValues>({
                           <FormControl>
                             <Input
                               {...field}
-                              className=" text-white bg-gray-900 border-gray-800 placeholder:text-gray-400"
+                              className="text-balance text-sm text-muted-foreground placeholder:text-gray-400"
                               type={
                                 FIELD_TYPES[
                                   field.name as keyof typeof FIELD_TYPES
                                 ]
+                              }
+                              placeholder={
+                                field.name === "password"
+                                  ? "********"
+                                  : `${
+                                      FIELD_NAMES[
+                                        field.name as keyof typeof FIELD_NAMES
+                                      ]
+                                    }`
                               }
                             />
                           </FormControl>
@@ -173,11 +135,7 @@ const AuthForm = <T extends FieldValues>({
                     />
                   ))}
 
-                <Button
-                  type="submit"
-                  className="w-full h-12 text-black bg-white hover:bg-gray-100"
-                  disabled={isLoading}
-                >
+                <Button type="submit" className="w-full  " disabled={isLoading}>
                   {isLoading ? (
                     <div className="flex items-center justify-center gap-2">
                       <span>جاري التحميل</span>
@@ -192,13 +150,32 @@ const AuthForm = <T extends FieldValues>({
               </form>
             </Form>
 
-            <p className="text-sm text-center text-gray-400 mt-4">
+            {isSignIn && (
+              <>
+                <div className="relative text-center my-6 text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+                  <span className="relative z-10 bg-background px-2 text-muted-foreground">
+                    او سجل دخولك باستخدام
+                  </span>
+                </div>
+                <Button variant="outline" className="w-full">
+                  تسجيل دخول باستخدام
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                      d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </Button>
+              </>
+            )}
+
+            <p className="text-sm text-center text-gray-400 mt-6">
               {isSignIn ? "ليس لديك حساب؟ " : "لديك حساب بالفعل؟ "}
               <Link
                 href={isSignIn ? "/sign-up" : "/sign-in"}
-                className="text-white hover:underline"
+                className="underline underline-offset-4 hover:text-primary"
               >
-                {isSignIn ? "سجّل الآن" : "تسجيل الدخول"}
+                {isSignIn ? "انشاء حساب" : "تسجيل الدخول"}
               </Link>
             </p>
           </div>

@@ -17,8 +17,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { servicesData } from "@/constants/services-data";
 
-import { CarouselSize } from "@/components/ImageCarousel";
 import { BookingModal } from "@/components/booking-model";
+import { CarouselSize } from "@/components/ImageCarousel";
 
 export default async function filterFeaturedDetailsPage({
   params,
@@ -136,7 +136,7 @@ export default async function filterFeaturedDetailsPage({
         </div>
 
         {/* الصورة الرئيسية والمعرض */}
-        <CarouselSize gallery={service?.gallery} />
+        <CarouselSize gallery={service?.gallery as string[]} />
 
         {/* بطاقة السعر والحجز (جوال) */}
         <div className="mb-8 md:hidden">

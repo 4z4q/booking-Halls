@@ -15,7 +15,7 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { NAV_LINKS } from "@/constants";
 import { Session } from "next-auth";
-import { ModeToggle } from "./ModeToggle";
+import { ModeToggle } from "./mode-toggle";
 
 const Navbar = ({ session }: { session: Session }) => {
   const router = useRouter();

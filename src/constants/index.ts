@@ -1,7 +1,7 @@
 export const NAV_LINKS = [
   { href: "/", key: "home", label: "الصفحة الرئيسية" },
-  { href: "/about", key: "about", label: "حول" },
   { href: "/services", key: "services", label: "الخدمات" },
+  { href: "/about", key: "about", label: "حول" },
   { href: "/contact", key: "contact_us", label: "الدعم" },
 ];
 
@@ -81,10 +81,10 @@ export const SOCIALS = {
 };
 
 export const FIELD_NAMES = {
-  firstName: "First Name",
-  lastName: "Last Name",
-  email: "Email",
-  password: "Password",
+  firstName: "أسمك الاول",
+  lastName: "اسمك الثاني",
+  email: "البريد الإلكتروني",
+  password: "كلمة المرور",
 };
 
 export const FIELD_TYPES = {

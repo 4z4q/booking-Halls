@@ -94,7 +94,12 @@ const Navbar = ({ session }: { session: Session }) => {
 
           {/* Mobile Icons */}
           <div className="md:hidden flex items-center gap-2 z-10">
-            <Button variant="ghost" size="icon" aria-label="الإشعارات">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="الإشعارات"
+              onClick={() => router.push("/bookings")}
+            >
               <FileText size={24} />
             </Button>
             <Button

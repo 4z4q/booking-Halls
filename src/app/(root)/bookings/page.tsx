@@ -4,13 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookingCard } from "@/components/booking-components/booking-card";
 import { bookings } from "@/constants/services-data";
+import { auth } from "../../../../auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "My Bookings",
   description: "View and manage all your bookings",
 };
 
-export default function MyBookingsPage() {
+export default async function MyBookingsPage() {      
+  const session = await auth();
+  if(!session) redirect("/sign-in");
   return (
     <div className="container mx-auto py-8 px-4 md:px-6">
       <div className="flex flex-col gap-2 mb-8">

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { allowedCategories } from "@/constants/services-data";
 import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { useRef } from "react";
+import { useMemo } from "react";
 export default function Home() {
   // Get the Arabic category name
   const getCategoryNameInArabic = (category: string) => {
@@ -62,17 +62,20 @@ export default function Home() {
     }
   };
 
-  const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
+  const plugin = useMemo(
+    () => Autoplay({ delay: 3000, stopOnInteraction: true }),
+    []
+  );
 
   return (
     <div className="min-h-screen bg-background container ">
       <main className="py-[16px]">
         {/* Hero Section */}
         <Carousel
-          plugins={[plugin.current]}
+          plugins={[plugin]}
           className="mb-12"
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.reset}
+          onMouseEnter={plugin.stop}
+          onMouseLeave={plugin.reset}
           dir="ltr"
         >
           <CarouselContent>

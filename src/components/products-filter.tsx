@@ -187,7 +187,6 @@ export const ProductsFilter = ({
                   setCapacity={setCapacity}
                 />
               )}
-              <Button className="w-full mb-6">تطبيق الفلاتر</Button>
             </div>
           </SheetContent>
         </Sheet>
@@ -224,8 +223,6 @@ export const ProductsFilter = ({
             setCapacity={setCapacity}
           />
         )}
-
-        <Button className="w-full">تطبيق الفلاتر</Button>
       </div>
 
       {/* Results */}

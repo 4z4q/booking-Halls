@@ -26,7 +26,7 @@ export default function Loading() {
         <section className="mb-16">
           <div className="flex items-center mb-8">
             <Diamond className="h-6 w-6 text-primary mr-2" />
-            <h2 className="text-3xl font-bold">Packages</h2>
+            <h2 className="text-3xl font-bold">الباقات</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {Array(3)
@@ -65,7 +65,7 @@ export default function Loading() {
         <section className="mb-16">
           <div className="flex items-center mb-8">
             <Flame className="h-6 w-6 text-primary mr-2" />
-            <h2 className="text-3xl font-bold">Popular Services</h2>
+            <h2 className="text-3xl font-bold">الخدمات الشائعة</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array(6)
@@ -103,7 +103,7 @@ export default function Loading() {
         <section>
           <div className="flex items-center mb-8">
             <Compass className="h-6 w-6 text-primary mr-2" />
-            <h2 className="text-3xl font-bold">Browse by Service Type</h2>
+            <h2 className="text-3xl font-bold">تصفح حسب نوع الخدمة</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
             {Array(6)

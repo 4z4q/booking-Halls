@@ -129,6 +129,7 @@ export const AMENITIES = [
   "مواقف سيارات",
   "خدمة الضيافة",
 ];
+
 export const CAPACITIES = [
   { label: "حتى 50 شخصًا", value: "50" },
   { label: "حتى 100 شخص", value: "100" },

@@ -1,19 +1,17 @@
-"use client";
-
 import { User, LogIn, FileText } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
 import { NAV_LINKS } from "@/constants";
 import { Session } from "next-auth";
 import { ModeToggle } from "./mode-toggle";
-import { MobileDrawer } from "./mobile-nav";
+import { MobileDrawer } from "./mobile-drawer";
+import { getUserByEmail } from "@/lib/actions/utils";
 
-const Navbar = ({ session }: { session: Session }) => {
-  const router = useRouter();
-
+const Navbar = async ({ session }: { session: Session }) => {
+  const email = session?.user?.email ?? "";
+  const data = await getUserByEmail(email);
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header  className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className=" container   flex flex-col">
         <div className="flex h-16 items-center justify-between">
           {/* Logo & Navigation */}
@@ -45,39 +43,34 @@ const Navbar = ({ session }: { session: Session }) => {
 
           {/* Actions - Desktop */}
           <div className="hidden md:flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              title="حجوزاتي"
-              onClick={() => router.push("/bookings")}
-            >
-              <FileText size={24} />
-            </Button>
+            <Link href={"/bookings"}>
+              <Button variant="ghost" size="icon" title="حجوزاتي">
+                <FileText size={24} />
+              </Button>
+            </Link>
             <ModeToggle />
-            <Button
-              aria-label={session ? "الملف الشخصي" : "تسجيل الدخول"}
-              variant="ghost"
-              size="icon"
-              onClick={() => router.push(session ? "/profile" : "/sign-in")}
-            >
-              {session ? (
-                <User className="h-5 w-5" />
-              ) : (
-                <LogIn className="h-5 w-5" />
-              )}
-            </Button>
+            <Link href={session ? "/account" : "/sign-in"}>
+              <Button
+                aria-label={session ? "الملف الشخصي" : "تسجيل الدخول"}
+                variant="ghost"
+                size="icon"
+              >
+                {session ? (
+                  <User className="h-5 w-5" />
+                ) : (
+                  <LogIn className="h-5 w-5" />
+                )}
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Icons Start */}
           <div className="flex items-center gap-2 md:hidden z-10">
-            <Button
-              variant="ghost"
-              size="icon"
-              title="حجوزاتي"
-              onClick={() => router.push("/bookings")}
-            >
-              <FileText size={24} />
-            </Button>
+            <Link href="/bookings">
+              <Button variant="ghost" size="icon" title="حجوزاتي">
+                <FileText size={24} />
+              </Button>
+            </Link>
           </div>
 
           {/* Logo - Mobile */}
@@ -85,7 +78,7 @@ const Navbar = ({ session }: { session: Session }) => {
 
           {/* Mobile Icons End */}
           <div className="md:hidden flex items-center gap-2 z-10">
-            <MobileDrawer session={session} />
+            <MobileDrawer data={data} />
           </div>
         </div>
 
@@ -108,69 +101,5 @@ const Navbar = ({ session }: { session: Session }) => {
     </header>
   );
 };
-
-// const MobileDrawer = ({
-//   isOpen,
-//   onClose,
-//   session,
-// }: {
-//   isOpen: boolean;
-//   onClose: () => void;
-//   session: Session | null;
-// }) => {
-//   const router = useRouter();
-
-//   return (
-//     <div
-//       className={`md:hidden fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-background/95 backdrop-blur transition-transform duration-300 ease-in-out ${
-//         isOpen ? "translate-y-0" : "-translate-y-full"
-//       }`}
-//     >
-//       <div className="flex flex-col items-center justify-center h-full gap-6 text-center px-4">
-//         {session ? (
-//           <>
-//             <div className="bg-white rounded-2xl shadow-lg p-4 w-full max-w-xs text-right">
-//               <p className="text-lg font-semibold text-primary mb-2">
-//                 مرحبًا، {session.user?.name || "المستخدم"}
-//               </p>
-//               <p className="text-sm text-muted-foreground mb-4">
-//                 {session.user?.email}
-//               </p>
-//               <div className="flex flex-col gap-2">
-//                 <Button onClick={() => router.push("/profile")}>
-//                   الملف الشخصي
-//                 </Button>
-//                 <Button onClick={() => router.push("/bookings")}>حجوزاتي</Button>
-//               </div>
-//             </div>
-//             <Button variant="outline" onClick={onClose}>
-//               إغلاق
-//             </Button>
-//           </>
-//         ) : (
-//           <>
-//             <div className="bg-white rounded-2xl shadow-lg p-4 w-full max-w-xs text-center">
-//               <p className="text-lg font-semibold text-primary mb-2">
-//                 مرحبًا بك في لحظات
-//               </p>
-//               <p className="text-sm text-muted-foreground mb-4">
-//                 قم بإنشاء حساب لتتمكن من مشاهدة جميع الخدمات، الأسعار،
-//                 التقييمات، والمزايا الخاصة!
-//               </p>
-//               <div className="flex flex-col gap-2">
-//                 <Button onClick={() => router.push("/sign-in")}>
-//                   تسجيل الدخول / إنشاء حساب
-//                 </Button>
-//               </div>
-//             </div>
-//             <Button variant="outline" onClick={onClose}>
-//               إغلاق
-//             </Button>
-//           </>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
 
 export default Navbar;

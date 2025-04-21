@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -12,13 +11,14 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Menu, ChevronLeft, X, LogOut } from "lucide-react";
-import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { ModeToggle } from "./mode-toggle";
 
-export function MobileDrawer({ session }: { session: Session }) {
+export function MobileDrawer({ data }: { data: UserInfo }) {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Drawer direction="right" open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
@@ -36,6 +36,7 @@ export function MobileDrawer({ session }: { session: Session }) {
       <DrawerContent className="rounded-l-2xl">
         <div className="flex flex-col gap-4 justify-between w-full h-full relative">
           <DrawerHeader className="border-b  border-gray-200 flex items-center gap-4 flex-row bg-[#f7f2f2] rounded-tl-2xl">
+            <div className="top-4 left-4 absolute"> <ModeToggle /></div>
             <div className="w-16 h-16 rounded-full overflow-hidden relative">
               <Image
                 src="/Untitled-1.jpg"
@@ -45,8 +46,10 @@ export function MobileDrawer({ session }: { session: Session }) {
               />
             </div>
             <div className="">
-              <DrawerTitle>محمد الجرادي</DrawerTitle>
-              <DrawerDescription>780842038</DrawerDescription>
+              <DrawerTitle>
+                {data.firstName} {data.lastName}
+              </DrawerTitle>
+              <DrawerDescription>{data.email}</DrawerDescription>
               <span className="text-xs bg-primary text-white font-semibold px-2 py-1 rounded mt-1 inline-block">
                 حساب مفعل
               </span>
@@ -58,7 +61,6 @@ export function MobileDrawer({ session }: { session: Session }) {
             <DrawerLink text="الحماية" />
             <DrawerLink text="الخصوصية" />
             <DrawerLink text="دعوة صديق" />
-            <DrawerLink text="عرض السقوف" />
             <DrawerLink text="الأحكام والشروط" />
             <DrawerLink text="أماكننا" />
             <DrawerLink text="تواصل معنا" />

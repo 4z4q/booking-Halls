@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "../../auth";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import { ThemeProvider } from "@/components/theme-provider";
+
 const IBM = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
   weight: ["400", "700"],
@@ -23,15 +24,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
+
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <SessionProvider session={session}>
-        <body className={IBM.className}>
+        <body className={`${IBM.className}`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
             enableSystem
             disableTransitionOnChange
+            
           >
             <NuqsAdapter> {children}</NuqsAdapter>
             <Toaster richColors position="top-center" />

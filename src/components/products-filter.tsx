@@ -13,9 +13,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SelectFilter } from "@/components/filters/SelectFilter";
-import { CheckboxFilter } from "@/components/filters/CheckboxFilter";
-import { PriceRangeFilter } from "@/components/filters/PriceRangeFilter";
+import { SelectFilter } from "@/components/filter-components/SelectFilter";
+import { CheckboxFilter } from "@/components/filter-components/CheckboxFilter";
+import { PriceRangeFilter } from "@/components/filter-components/PriceRangeFilter";
 import {
   Sheet,
   SheetContent,

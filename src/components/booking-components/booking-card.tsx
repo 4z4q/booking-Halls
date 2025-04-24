@@ -17,16 +17,7 @@ import {
 import { CancelBookingDialog } from "./cancel-booking-dialog";
 import { ViewDetailsDialog } from "./view-details-dialog";
 
-interface Booking {
-  id: string;
-  artist: string;
-  date: string;
-  time: string;
-  location: string;
-  price: string;
-  status: "pending" | "confirmed" | "completed" | "cancelled";
-  image: string;
-}
+
 
 interface BookingCardProps {
   booking: Booking;

@@ -17,8 +17,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { servicesData } from "@/constants/services-data";
 
-import { BookingModal } from "@/components/booking-model";
-import { CarouselSize } from "@/components/ImageCarousel";
+import { BookingModal } from "@/components/booking-components/booking-model";
+import { CarouselSize } from "@/components/imageCarousel";
 
 export default async function filterFeaturedDetailsPage({
   params,
@@ -293,10 +293,6 @@ export default async function filterFeaturedDetailsPage({
                   </Badge>
                 </div>
               </div>
-
-              <Button className="w-full mb-3 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600">
-                <Calendar className="ml-2 h-4 w-4" /> احجز الآن
-              </Button>
 
               <Button variant="outline" className="w-full">
                 تواصل مع القاعة

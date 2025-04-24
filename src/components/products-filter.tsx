@@ -40,7 +40,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { CAPACITIES, LOCATIONS } from "@/constants";
-import { BookingModal } from "./booking-model";
+import { BookingModal } from "./booking-components/booking-model";
 
 interface FilterServices {
   id: number;

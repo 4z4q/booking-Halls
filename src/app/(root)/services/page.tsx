@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { SearchFilter } from "../../../components/services-components/search-filter";
 import { PackageCard } from "../../../components/services-components/package-card";
 import { ServiceCard } from "../../../components/services-components/service-card";
@@ -123,7 +123,10 @@ export default function ServicesPage() {
     return matchesSearch && matchesFilter;
   });
 
-  const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
+  const plugin = useMemo(
+    () => Autoplay({ delay: 3000, stopOnInteraction: true }),
+    []
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -165,9 +168,9 @@ export default function ServicesPage() {
                 loop: true,
               }}
               className="w-full"
-              plugins={[plugin.current]}
-              onMouseEnter={plugin.current.stop}
-              onMouseLeave={plugin.current.reset}
+              plugins={[plugin]}
+              onMouseEnter={plugin.stop}
+              onMouseLeave={plugin.reset}
               dir="ltr"
             >
               <CarouselContent>
@@ -202,9 +205,9 @@ export default function ServicesPage() {
               <Carousel
                 opts={{ align: "start", loop: true }}
                 className="w-full"
-                plugins={[plugin.current]}
-                onMouseEnter={plugin.current.stop}
-                onMouseLeave={plugin.current.reset}
+                plugins={[plugin]}
+                onMouseEnter={plugin.stop}
+                onMouseLeave={plugin.reset}
                 dir="ltr"
               >
                 <CarouselContent className="flex px-0 sm:px-2">

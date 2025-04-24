@@ -5,13 +5,13 @@ import { NAV_LINKS } from "@/constants";
 import { Session } from "next-auth";
 import { ModeToggle } from "./mode-toggle";
 import { MobileDrawer } from "./mobile-drawer";
-import { getUserByEmail } from "@/lib/actions/utils";
+import { getUserByEmail } from "@/utils/utils";
 
 const Navbar = async ({ session }: { session: Session }) => {
   const email = session?.user?.email ?? "";
   const data = await getUserByEmail(email);
   return (
-    <header  className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className=" container   flex flex-col">
         <div className="flex h-16 items-center justify-between">
           {/* Logo & Navigation */}

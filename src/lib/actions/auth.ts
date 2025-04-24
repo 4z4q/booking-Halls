@@ -9,18 +9,26 @@ import { hash } from "bcryptjs";
 const SALT_ROUNDS = 10;
 
 export const signInWithCredentials = async (
-  params: Pick<AuthCredentials, "email" | "password">
+  params: Pick<AuthCredentials, "email" | "password"> & { callbackUrl?: string }
 ) => {
-  const { email, password } = params;
+  const { email, password, callbackUrl } = params;
 
   try {
     const result = await signIn("credentials", {
       email,
       password,
       redirect: false,
+      callbackUrl: callbackUrl || "/",
     });
 
     if (result?.error) return { success: false, error: result.error };
+
+    console.log("CallbackUrl in signInWithCredentials:", callbackUrl);
+    console.log("Result from signIn:", result);
+
+    // if (result?.url) {
+    //   redirect(result.url);
+    // }
 
     return { success: true };
   } catch (error: Error | unknown) {

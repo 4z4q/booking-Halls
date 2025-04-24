@@ -6,17 +6,18 @@ import { signInSchema } from "@/lib/validation";
 import { GalleryVerticalEnd } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       {/* Left Section - Form */}
       <div className="flex flex-col gap-4 p-6 md:p-10 ">
         <div className="flex justify-center gap-2 md:justify-start">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-medium "
-          >
+          <Link href="/" className="flex items-center gap-2 font-medium ">
             لحظات
             <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
               <GalleryVerticalEnd className="size-4" />
@@ -32,7 +33,9 @@ export default function LoginPage() {
                 email: "",
                 password: "",
               }}
-              onSubmit={signInWithCredentials}
+              onSubmit={(data) =>
+                signInWithCredentials({ ...data, callbackUrl })
+              }
             />
           </div>
         </div>

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { format, addMonths, isBefore, isAfter } from "date-fns";
 import { ar } from "date-fns/locale"; // Fixed import - removed 'se'
-import { CalendarIcon, Clock, CheckCircle, Loader2 } from "lucide-react";
+import { CalendarIcon, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,29 +18,9 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
-
-interface BookingModalProps {
-  serviceName: string;
-  serviceImage?: string;
-  servicePrice: number;
-  serviceLocation?: string;
-  serviceType: string;
-  children: React.ReactNode;
-  onBookingComplete?: (bookingData: BookingData) => void;
-}
-
-interface BookingData {
-  serviceId: string;
-  date: Date | undefined;
-  timeSlot: string;
-  customerName: string;
-  customerEmail: string;
-  customerPhone: string;
-  specialRequests: string;
-  paymentMethod: string;
-}
+import { Checkmark } from "../currency-transfer";
 
 const timeSlots = [
   "9:00 صباحاً",
@@ -56,6 +36,7 @@ const timeSlots = [
   "7:00 مساءً",
   "8:00 مساءً",
 ];
+
 
 export function BookingModal({
   serviceName,
@@ -78,7 +59,8 @@ export function BookingModal({
   const [customerPhone, setCustomerPhone] = useState("");
   const [specialRequests, setSpecialRequests] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
-
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const router = useRouter();
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,7 +96,9 @@ export function BookingModal({
         toast.info("يجب تسجيل الدخول قبل الحجز ", {
           action: {
             label: "تسجيل الدخول",
-            onClick: () => redirect("/sign-in"),
+            onClick: () => {
+              redirect(`/sign-in?callbackUrl=${window.location.pathname}`);
+            },
           },
         });
         return;
@@ -168,7 +152,7 @@ export function BookingModal({
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-[500px] ">
+      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto ">
         {step === 1 && (
           <>
             <DialogHeader className="mt-3">
@@ -279,7 +263,7 @@ export function BookingModal({
             <DialogFooter className="flex flex-row-reverse sm:justify-between">
               <Button
                 onClick={() => setStep(3)}
-                disabled={!customerName || !customerEmail || !customerPhone}
+                // disabled={!customerName || !customerEmail || !customerPhone}
               >
                 التالي
               </Button>
@@ -343,23 +327,25 @@ export function BookingModal({
               </div>
 
               <div className="space-y-4">
-                <Label>طريقة الدفع</Label>
+                <Label>اختر طريقة الدفع</Label>
                 <RadioGroup
                   value={paymentMethod}
-                  onValueChange={setPaymentMethod}
+                  onValueChange={(val) => {
+                    setPaymentMethod(val);
+                    if (val === "online") {
+                      setIsRedirecting(true);
+                      setTimeout(() => {
+                        router.push(`/checkout?amount=${servicePrice}`);
+                      }, 3000);
+                    }
+                  }}
                   className="flex flex-col space-y-2"
                 >
                   <div className="flex items-center justify-end space-x-2 space-x-reverse">
-                    <Label htmlFor="credit-card" className="font-normal mr-1">
-                      بطاقة ائتمان
+                    <Label htmlFor="online" className="font-normal mr-1">
+                      الدفع الإلكتروني
                     </Label>
-                    <RadioGroupItem value="credit-card" id="credit-card" />
-                  </div>
-                  <div className="flex items-center justify-end space-x-2 space-x-reverse">
-                    <Label htmlFor="apple-pay" className="font-normal mr-1">
-                      Apple Pay
-                    </Label>
-                    <RadioGroupItem value="apple-pay" id="apple-pay" />
+                    <RadioGroupItem value="online" id="online" />
                   </div>
                   <div className="flex items-center justify-end space-x-2 space-x-reverse">
                     <Label htmlFor="cash" className="font-normal mr-1">
@@ -371,8 +357,21 @@ export function BookingModal({
               </div>
             </div>
 
+            {paymentMethod === "online" && isRedirecting && (
+              <div className="flex items-center justify-center mt-6">
+                <Loader2 className="animate-spin w-5 h-5 ml-2 text-primary" />
+                <span>يتم الآن تحويلك لصفحة الدفع...</span>
+              </div>
+            )}
             <DialogFooter className="flex flex-row-reverse sm:justify-between">
-              <Button onClick={handleSubmit} disabled={isSubmitting}>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (paymentMethod === "cash") setStep(4);
+                  else handleSubmit(e);
+                }}
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="ml-2 h-4 w-4 animate-spin" />
@@ -402,14 +401,23 @@ export function BookingModal({
             </DialogHeader>
 
             <div className="py-6 flex flex-col items-center justify-center">
-              <div className="rounded-full bg-green-100 p-3 mb-4">
-                <CheckCircle className="h-10 w-10 text-green-600" />
+              <div className="rounded-full  p-3 mb-4">
+                {/* <CheckCircle className="h-10 w-10 text-green-600 font-semibold" /> */}
+                <Checkmark />
               </div>
 
               <p className="text-center mb-4">
-                تم تأكيد حجزك بنجاح. سيتم إرسال تفاصيل الحجز إلى بريدك
-                الإلكتروني.
+                {paymentMethod === "online"
+                  ? "تم تأكيد حجزك ودفعك بنجاح. سيتم إرسال تفاصيل الحجز إلى بريدك الإلكتروني."
+                  : "تم تأكيد حجزك بنجاح. يرجى الحضور في الموعد المحدد لإتمام الدفع."}
               </p>
+
+              {paymentMethod === "cash" && (
+                <div className="text-sm text-center text-yellow-600 bg-yellow-100 p-3 rounded-lg mb-4 border border-yellow-300">
+                  لضمان حجزك، يجب تأكيد الحضور خلال 6 ساعات من الآن، وإلا سيتم
+                  إلغاء الحجز تلقائيًا.
+                </div>
+              )}
 
               <div className="rounded-lg border p-4 w-full">
                 <div className="flex justify-between items-center">
@@ -436,3 +444,19 @@ export function BookingModal({
     </Dialog>
   );
 }
+
+// {paymentMethod === "online" && stripePromise ? (
+//   <Elements
+//     stripe={stripePromise}
+//     options={{
+//       mode: "payment",
+//       amount: Math.round(servicePrice * 100),
+//       currency: "usd",
+//     }}
+//   >
+//     <CheckoutPage
+//       amount={servicePrice}
+//       onPaymentSuccess={setPaymentSuccess}
+//     />
+//   </Elements>
+// ) : null}

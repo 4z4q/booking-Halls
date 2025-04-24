@@ -11,3 +11,9 @@ export const getUserByEmail = async (email: string) => {
 
   return result[0] || null;
 };
+
+function convertToSubcurrency(amount: number, factor = 100) {
+  return Math.round(amount * factor);
+}
+
+export default convertToSubcurrency;

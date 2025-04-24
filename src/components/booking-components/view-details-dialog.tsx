@@ -15,17 +15,6 @@ import {
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 
-interface Booking {
-  id: string;
-  artist: string;
-  date: string;
-  time: string;
-  location: string;
-  price: string;
-  status: string;
-  image: string;
-}
-
 interface ViewDetailsDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;

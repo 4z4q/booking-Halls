@@ -15,10 +15,10 @@ export default function LoginPage() {
         <div className="flex justify-center gap-2 md:justify-start">
           <Link
             href="/"
-            className="flex items-center gap-2 font-medium text-white"
+            className="flex items-center gap-2 font-medium"
           >
             لحظات
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-white text-black">
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
               <GalleryVerticalEnd className="size-4" />
             </div>
           </Link>

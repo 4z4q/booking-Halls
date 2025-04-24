@@ -17,7 +17,7 @@ import { AccountDetailsCard } from "@/components/account-components/account-deta
 import { PersonalInfoCard } from "@/components/account-components/personal-info-card";
 import { auth } from "../../../../auth";
 import { redirect } from "next/navigation";
-import { getUserByEmail } from "@/lib/actions/utils";
+import { getUserByEmail } from "@/utils/utils";
 
 export const metadata: Metadata = {
   title: "معلومات الحساب",

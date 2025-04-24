@@ -18,7 +18,7 @@ import Link from "next/link";
 import { servicesData } from "@/constants/services-data";
 
 import { BookingModal } from "@/components/booking-components/booking-model";
-import { CarouselSize } from "@/components/imageCarousel";
+import { CarouselSize } from "../../../../../components/imageCarousel";
 
 export default async function filterFeaturedDetailsPage({
   params,

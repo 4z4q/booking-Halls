@@ -6,7 +6,7 @@ export const signUpSchema = z.object(
     lastName: z.string().min(3),
     email: z.string().email(),
     password: z.string().min(6),
-    // role: z.enum(["client", "vendor", "admin"]),
+    role: z.enum(["client", "vendor", "admin"]),
     // createdAt: z.date(),
   },
   {
@@ -19,3 +19,11 @@ export const signInSchema = z.object({
   password: z.string().min(6),
 });
 
+export const vendorProfileSchema = z.object({
+  businessName: z.string().min(3),
+  phoneNumber: z.string().min(8),
+  location: z.string().min(3),
+  serviceType: z.string().min(3),
+  documentUrl: z.string().optional(),
+  status: z.enum(["pending", "approved", "rejected"]).default("pending"),
+});

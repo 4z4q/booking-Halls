@@ -1,7 +1,7 @@
 "use client";
 
 import AuthForm from "@/components/auth-form";
-import { signInWithCredentials } from "@/lib/actions/auth";
+import { signInWithCredentials } from "@/utils/auth";
 import { signInSchema } from "@/lib/validation";
 import { GalleryVerticalEnd } from "lucide-react";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/';
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   return (
     <div className="grid min-h-svh lg:grid-cols-2">

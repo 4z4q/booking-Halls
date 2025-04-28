@@ -1,6 +1,6 @@
 "use client";
 
-import { logoutUser } from "@/lib/actions/auth";
+import { logoutUser } from "@/utils/auth";
 import { Button } from "./ui/button";
 
 const Logout = () => {

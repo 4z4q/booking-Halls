@@ -83,6 +83,7 @@ export const SOCIALS = {
 export const FIELD_NAMES = {
   firstName: "أسمك الاول",
   lastName: "اسمك الثاني",
+  role: "نوع المستخدم",
   email: "البريد الإلكتروني",
   password: "كلمة المرور",
 };
@@ -92,6 +93,7 @@ export const FIELD_TYPES = {
   email: "email",
   lastName: "text",
   password: "password",
+  role: "select",
 };
 
 export const LOCATIONS = [
@@ -137,3 +139,20 @@ export const CAPACITIES = [
   { label: "حتى 500 شخص", value: "500" },
   { label: "أكثر من 500 شخص", value: "1000" },
 ];
+
+export const FIELD_NAMES_VENDOR = {
+  businessName: "اسم النشاط التجاري",
+  phoneNumber: "رقم الهاتف",
+  location: "الموقع",
+  serviceType: "نوع الخدمة",
+  documentUrl: "رابط الوثيقة",
+};
+
+export const FIELD_TYPES_VENDOR = {
+  businessName: "text",
+  phoneNumber: "text",
+  location: "text",
+  serviceType: "text",
+  documentUrl: "url",
+};
+

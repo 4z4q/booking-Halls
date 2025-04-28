@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { format, addMonths, isBefore, isAfter } from "date-fns";
+import { format } from "date-fns";
 import { ar } from "date-fns/locale"; // Fixed import - removed 'se'
-import { CalendarIcon, Clock, Loader2 } from "lucide-react";
+import {  CalendarIcon, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -21,6 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Checkmark } from "../currency-transfer";
+import AppCalendr from "./app-calendr";
 
 const timeSlots = [
   "9:00 صباحاً",
@@ -36,7 +37,6 @@ const timeSlots = [
   "7:00 مساءً",
   "8:00 مساءً",
 ];
-
 
 export function BookingModal({
   serviceName,
@@ -122,32 +122,7 @@ export function BookingModal({
     }
   };
 
-  const today = new Date();
-  const maxDate = addMonths(today, 2); // Allow booking for the next two months
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedDate = new Date(e.target.value);
-    selectedDate.setHours(0, 0, 0, 0);
-    // Set hours, minutes, seconds, and milliseconds to 0 because we only care about the date
-    today.setHours(0, 0, 0, 0);
-
-    if (isBefore(selectedDate, today)) {
-      alert("لا يمكنك اختيار تاريخ في الماضي.");
-      return;
-    }
-
-    if (isAfter(selectedDate, maxDate)) {
-      alert("يمكنك الحجز خلال الشهرين القادمين فقط.");
-      return;
-    }
-
-    if (selectedDate.getDay() === 5) {
-      alert("يوم الجمعة غير متاح للحجز.");
-      return;
-    }
-
-    setDate(selectedDate);
-  };
 
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogChange}>
@@ -165,18 +140,7 @@ export function BookingModal({
             <div className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="date">التاريخ</Label>
-
-                <div className="relative mb-4">
-                  <input
-                    type="date"
-                    className="peer w-full appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 pr-10 text-gray-700 shadow-sm focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    value={date ? format(date, "yyyy-MM-dd") : ""}
-                    onChange={handleDateChange}
-                    min={format(today, "yyyy-MM-dd")}
-                    max={format(maxDate, "yyyy-MM-dd")}
-                  />
-                  <i className="fas fa-calendar-alt absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 peer-focus:text-purple-500 pointer-events-none"></i>
-                </div>
+                <AppCalendr />
               </div>
 
               <div className="space-y-2">
@@ -196,6 +160,25 @@ export function BookingModal({
                 </div>
               </div>
             </div>
+            {/* <div className="space-y-4 py-4">
+              <div className="space-y-2">
+                <Label htmlFor="date">التاريخ</Label>
+
+                <div className="relative mb-4">
+                  <input
+                    type="date"
+                    className="peer w-full appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 pr-10 text-gray-700 shadow-sm focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    value={date ? format(date, "PPP") : ""}
+                    onChange={handleDateChange}
+                    min={format(today, "PPP")}
+                    max={format(maxDate, "PPP")}
+                  />
+                  <i className="fas fa-calendar-alt absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 peer-focus:text-purple-500 pointer-events-none"></i>
+                </div>
+              </div>
+
+              
+            </div> */}
 
             <DialogFooter className="flex flex-row-reverse sm:justify-between">
               <Button onClick={() => setStep(2)} disabled={!date || !timeSlot}>

@@ -4,8 +4,9 @@ import { auth } from "../../../auth";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Authentication - TechReview",
-  description: "Authentication pages for TechReview.",
+  title: "لحظات - تسجيل الدخول أو إنشاء حساب",
+  description:
+    "قم بتسجيل الدخول أو إنشاء حساب جديد للوصول إلى خدمات لحظات بسهولة وسرعة.",
 };
 
 export default async function AuthLayout({

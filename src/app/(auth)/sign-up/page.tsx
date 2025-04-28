@@ -1,7 +1,7 @@
 "use client";
 
 import AuthForm from "@/components/auth-form";
-import { signUp } from "@/lib/actions/auth";
+import { signUp } from "@/utils/auth";
 import { signUpSchema } from "@/lib/validation";
 import { GalleryVerticalEnd } from "lucide-react";
 import Image from "next/image";
@@ -13,12 +13,9 @@ export default function LoginPage() {
       {/* Left Section - Form */}
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-medium"
-          >
+          <Link href="/" className="flex items-center gap-2 font-medium">
             لحظات
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <div className="flex h-6 w-6 items-center justify-center r  ounded-md bg-primary text-primary-foreground">
               <GalleryVerticalEnd className="size-4" />
             </div>
           </Link>
@@ -32,6 +29,7 @@ export default function LoginPage() {
                 firstName: "",
                 lastName: "",
                 email: "",
+                role: "client",
                 password: "",
               }}
               onSubmit={signUp}

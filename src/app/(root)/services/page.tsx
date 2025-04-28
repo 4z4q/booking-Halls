@@ -173,7 +173,7 @@ export default function ServicesPage() {
               onMouseLeave={plugin.reset}
               dir="ltr"
             >
-              <CarouselContent>
+              <CarouselContent >
                 {packages.map((pkg) => (
                   <CarouselItem key={pkg.id} className="basis-[100%]">
                     <PackageCard package={pkg} />

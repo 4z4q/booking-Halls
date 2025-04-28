@@ -127,7 +127,7 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 <div className="absolute bottom-0 p-4 text-white">
-                  <span className="mb-1 inline-block rounded bg-purple-600 px-2 py-1 text-xs font-medium">
+                  <span className="mb-1 inline-block rounded bg-primary px-2 py-1 text-xs font-medium">
                     {item.tag}
                   </span>
                   <h2 className="mb-1 text-base sm:text-lg md:text-xl font-bold">
@@ -154,7 +154,7 @@ export default function Home() {
                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto pb-3">
                   اختر الخدمة، واحجز بكل سهولة وراحة
                 </p>
-                <span className="absolute left-1/2 -bottom-1 transform -translate-x-1/2 w-20 h-[3px] bg-purple-600 rounded-full transition-all duration-300 group-hover:w-full" />
+                <span className="absolute left-1/2 -bottom-1 transform -translate-x-1/2 w-20 h-[3px] bg-primary rounded-full transition-all duration-300 group-hover:w-full" />
               </div>
             </div>
 
@@ -232,7 +232,7 @@ export default function Home() {
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto pb-3">
                 استفد من الخصومات المحدودة قبل انتهائها{" "}
               </p>
-              <span className="absolute left-1/2 -bottom-1 transform -translate-x-1/2 w-20 h-[3px] bg-purple-600 rounded-full transition-all duration-300 group-hover:w-full" />
+              <span className="absolute left-1/2 -bottom-1 transform -translate-x-1/2 w-20 h-[3px] bg-primary rounded-full transition-all duration-300 group-hover:w-full" />
             </div>
           </div>
 
@@ -255,7 +255,7 @@ export default function Home() {
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute top-2 left-2">
-                    <span className="rounded bg-blue-600 px-2 py-1 text-xs font-semibold text-white">
+                    <span className="rounded bg-primary px-2 py-1 text-xs font-semibold text-white">
                       احجزي الآن
                     </span>
                   </div>
@@ -313,7 +313,7 @@ export default function Home() {
                     />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <span className="text-xs font-medium text-purple-600">
+                    <span className="text-xs font-medium text-primary">
                       {item.category}
                     </span>
                     <h3 className="font-medium">{item.title}</h3>

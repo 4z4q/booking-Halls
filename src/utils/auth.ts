@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/database/drizzle";
-import { signIn, signOut } from "../../../auth";
+import { signIn, signOut } from "../../auth";
 import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import { hash } from "bcryptjs";
@@ -23,8 +23,8 @@ export const signInWithCredentials = async (
 
     if (result?.error) return { success: false, error: result.error };
 
-    console.log("CallbackUrl in signInWithCredentials:", callbackUrl);
-    console.log("Result from signIn:", result);
+    // console.log("CallbackUrl in signInWithCredentials:", callbackUrl);
+    // console.log("Result from signIn:", result);
 
     // if (result?.url) {
     //   redirect(result.url);

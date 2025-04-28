@@ -15,11 +15,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
-import { logoutUser } from "@/lib/actions/auth";
-import { redirect } from "next/navigation";
+import { logoutUser } from "@/utils/auth";
+import { useRouter } from "next/navigation";
 
 export function MobileDrawer({ data }: { data: UserInfo }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
 
   return (
     <Drawer direction="right" open={isOpen} onOpenChange={setIsOpen}>
@@ -38,7 +40,9 @@ export function MobileDrawer({ data }: { data: UserInfo }) {
       <DrawerContent className="rounded-l-2xl">
         {!data ? (
           <div className="flex flex-col items-center justify-center h-full p-6 text-center space-y-6">
-            <DrawerTitle className="text-2xl font-bold text-gray-800">أهلًا بك 👋</DrawerTitle>
+            <DrawerTitle className="text-2xl font-bold text-gray-800">
+              أهلًا بك 👋
+            </DrawerTitle>
             <p className="text-gray-600 text-sm">
               لتتمكن من عرض بيانات حسابك والوصول إلى المميزات، الرجاء تسجيل
               الدخول إلى حسابك.
@@ -47,15 +51,15 @@ export function MobileDrawer({ data }: { data: UserInfo }) {
               variant="default"
               className="mt-4"
               onClick={() => {
-                redirect("/sign-in");
+                router.push("/sign-in");
               }}
             >
               تسجيل الدخول
             </Button>
           </div>
         ) : (
-          <div className="flex flex-col gap-4 justify-between w-full h-full relative">
-            <DrawerHeader className="border-b border-gray-200 flex items-center gap-4 flex-row bg-[#f7f2f2] rounded-tl-2xl">
+          <div className="flex flex-col justify-between w-full h-full relative">
+            <DrawerHeader className="border-b border-gray-200 flex items-center gap-4 flex-row bg-gradient-to-r from-gray-50 to-white rounded-tl-2xl">
               <div className="top-4 left-4 absolute">
                 <ModeToggle />
               </div>
@@ -79,18 +83,42 @@ export function MobileDrawer({ data }: { data: UserInfo }) {
             </DrawerHeader>
 
             <div className="mt-6 space-y-4 text-white">
-              <DrawerLink text="بيانات الحساب" />
-              <DrawerLink text="الحماية" />
-              <DrawerLink text="الخصوصية" />
-              <DrawerLink text="دعوة صديق" />
-              <DrawerLink text="الأحكام والشروط" />
-              <DrawerLink text="أماكننا" />
-              <DrawerLink text="تواصل معنا" />
+              <DrawerLink
+                onClick={() => setIsOpen(false)}
+                href="/account"
+                text="بيانات الحساب"
+              />
+              <DrawerLink
+                onClick={() => setIsOpen(false)}
+                href="#"
+                text="الخصوصية"
+              />
+              <DrawerLink
+                onClick={() => setIsOpen(false)}
+                href="#"
+                text="دعوة صديق"
+              />
+              <DrawerLink
+                onClick={() => setIsOpen(false)}
+                href="#"
+                text="الأحكام والشروط"
+              />
+              <DrawerLink
+                onClick={() => setIsOpen(false)}
+                href="#"
+                text="أماكننا"
+              />
+              <DrawerLink
+                onClick={() => setIsOpen(false)}
+                href="/contact"
+                text="تواصل معنا"
+              />
             </div>
 
             <DrawerFooter>
               <Button
                 variant="outline"
+                className="flex gap-2 items-center"
                 onClick={async () => {
                   await logoutUser();
                 }}
@@ -106,10 +134,19 @@ export function MobileDrawer({ data }: { data: UserInfo }) {
   );
 }
 
-export function DrawerLink({ text }: { text: string }) {
+export function DrawerLink({
+  text,
+  href,
+  onClick,
+}: {
+  text: string;
+  href: string;
+  onClick?: () => void;
+}) {
   return (
     <Link
-      href={"#"}
+      href={href}
+      onClick={onClick}
       className="w-full px-4 pb-4 border-b border-b-gray-200  text-black flex items-center justify-between text-sm gap-2  transition-all"
     >
       <span>{text}</span>

@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  HelpCircle,
-} from "lucide-react";
+import { Phone, Mail, MapPin, Clock, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,7 +21,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background overflow-hidden">
       {/* Hero Section */}
-      <section className="w-screen relative left-1/2 right-1/2 mx-[-50vw] bg-gradient-to-b from-purple-600 to-blue-500 text-white overflow-hidden">
+      <section className="w-screen relative left-1/2 right-1/2 mx-[-50vw] bg-gradient-to-b from-chart-1 to-chart-4 text-white overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative py-16 md:py-24 text-center">
@@ -176,15 +170,13 @@ export default function ContactPage() {
                     <div className="flex justify-end">
                       <Button
                         type="submit"
-                        className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600"
+                        className="text-white font-semibold bg-gradient-to-r from-chart-2 to-chart-1 hover:brightness-110 duration-300 transition-all ease-in-out rounded-xl "
                       >
                         إرسال الرسالة
                       </Button>
                     </div>
                   </form>
                 </div>
-
- 
               </TabsContent>
 
               <TabsContent value="support" className="space-y-8">
@@ -339,7 +331,7 @@ export default function ContactPage() {
                     <div className="flex justify-end">
                       <Button
                         type="submit"
-                        className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600"
+                        className="text-white font-semibold bg-gradient-to-r from-chart-2 to-chart-1 hover:brightness-110 duration-300 transition-all ease-in-out rounded-xl "
                       >
                         إرسال طلب الدعم
                       </Button>

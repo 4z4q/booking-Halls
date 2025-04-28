@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   DefaultValues,
@@ -10,7 +9,6 @@ import {
   UseFormReturn,
 } from "react-hook-form";
 import { ZodType } from "zod";
-// import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -27,6 +25,13 @@ import { useRouter } from "next/navigation";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectItem,
+  SelectContent,
+} from "./ui/select";
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>;
@@ -97,43 +102,64 @@ const AuthForm = <T extends FieldValues>({
               >
                 {Object.keys(defaultValues)
                   .filter((field) => field !== "universityId")
-                  .map((field) => (
-                    <FormField
-                      key={field.toString()}
-                      control={form.control}
-                      name={field as Path<T>}
-                      render={({ field }) => (
-                        <FormItem className="grid gap-2">
-                          <FormLabel className="capitalize ">
-                            {FIELD_NAMES[
-                              field.name as keyof typeof FIELD_NAMES
-                            ] || field.name}
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              className="text-balance text-sm text-muted-foreground placeholder:text-gray-400"
-                              type={
-                                FIELD_TYPES[
-                                  field.name as keyof typeof FIELD_TYPES
-                                ]
-                              }
-                              placeholder={
-                                field.name === "password"
-                                  ? "********"
-                                  : `${
-                                      FIELD_NAMES[
-                                        field.name as keyof typeof FIELD_NAMES
-                                      ]
-                                    }`
-                              }
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  ))}
+                  .map((field) => {
+                    const fieldType =
+                      FIELD_TYPES[field as keyof typeof FIELD_TYPES];
+                    const isSelect = fieldType === "select";
+                    return (
+                      <FormField
+                        key={field.toString()}
+                        control={form.control}
+                        name={field as Path<T>}
+                        render={({ field }) => (
+                          <FormItem className="grid gap-2">
+                            <FormLabel className="capitalize ">
+                              {FIELD_NAMES[
+                                field.name as keyof typeof FIELD_NAMES
+                              ] || field.name}
+                            </FormLabel>
+                            <FormControl>
+                              {isSelect ? (
+                                <Select dir="rtl" defaultValue="1">
+                                  <SelectTrigger className="w-full">
+                                    <SelectValue />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="client" >
+                                      مستخدم عادي
+                                    </SelectItem>
+                                    <SelectItem value="provider">
+                                      مزود خدمات
+                                    </SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              ) : (
+                                <Input
+                                  {...field}
+                                  className="text-balance text-sm text-muted-foreground placeholder:text-gray-400"
+                                  type={
+                                    FIELD_TYPES[
+                                      field.name as keyof typeof FIELD_TYPES
+                                    ]
+                                  }
+                                  placeholder={
+                                    field.name === "password"
+                                      ? "********"
+                                      : `${
+                                          FIELD_NAMES[
+                                            field.name as keyof typeof FIELD_NAMES
+                                          ]
+                                        }`
+                                  }
+                                />
+                              )}
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    );
+                  })}
 
                 <Button type="submit" className="w-full  " disabled={isLoading}>
                   {isLoading ? (

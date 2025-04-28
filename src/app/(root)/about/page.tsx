@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background overflow-hidden">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-purple-600 to-blue-500 text-white w-screen  left-1/2 right-1/2 mx-[-50vw]">
+      <section className="relative bg-gradient-to-b from-chart-1 to-chart-4 text-white w-screen  left-1/2 right-1/2 mx-[-50vw]">
         <div className="absolute inset-0 bg-grid-white/[0.2] [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
         <div className="container px-[16px] relative py-12 md:py-20 text-center ">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6  ">
@@ -126,7 +126,7 @@ export default function AboutPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           <div className="text-center">
-            <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
+            <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-chart-3 text-white flex items-center justify-center text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
               1
             </div>
             <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">
@@ -139,7 +139,7 @@ export default function AboutPage() {
           </div>
 
           <div className="text-center">
-            <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
+            <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-chart-1 text-white flex items-center justify-center text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
               2
             </div>
             <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">
@@ -151,7 +151,7 @@ export default function AboutPage() {
           </div>
 
           <div className="text-center">
-            <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
+            <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-chart-3 text-white flex items-center justify-center text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
               3
             </div>
             <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">
@@ -163,7 +163,7 @@ export default function AboutPage() {
           </div>
 
           <div className="text-center">
-            <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
+            <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-chart-1 text-white flex items-center justify-center text-xl md:text-2xl font-bold mx-auto mb-3 md:mb-4">
               4
             </div>
             <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">
@@ -177,7 +177,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section className="bg-gradient-to-r from-purple-600 to-blue-500 text-white py-16 w-screen relative left-1/2 right-1/2 mx-[-50vw]">
+      <section className="bg-gradient-to-r from-chart-3 to-chart-1 text-white py-16 w-screen relative left-1/2 right-1/2 mx-[-50vw]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
@@ -197,7 +197,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Team */}
-      <section className="container py-10 md:py-16 px-4">
+      {/* <section className="container py-10 md:py-16 px-4">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">
             فريقنا
@@ -207,12 +207,11 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
           {[
             { name: " محمد جميل", role: "المؤسس والرئيس التنفيذي" },
             { name: "عاطف محمد", role: "مدير العمليات" },
             { name: "صقر الخولاني", role: "مدير التسويق" },
-            { name: "محمد جليمد", role: "مدير خدمة العملاء" },
           ].map((member, index) => (
             <div key={index} className="text-center">
               <div className="relative h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48 rounded-full overflow-hidden mx-auto mb-3 md:mb-4">
@@ -232,7 +231,7 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* CTA */}
       <section className="bg-muted py-10 md:py-16 w-screen relative left-1/2 right-1/2 mx-[-50vw]">
@@ -247,7 +246,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/services"
-              className="inline-flex h-10 items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-blue-500 px-6 md:px-8 text-sm font-medium text-white shadow transition-colors hover:from-purple-700 hover:to-blue-600"
+              className="inline-flex h-10 items-center justify-center rounded-md bg-gradient-to-r  from-chart-2 to-chart-1 px-6 md:px-8 text-sm font-medium text-white shadow transition-colors  hover:brightness-110 duration-300  ease-in-out"
             >
               استعرض الخدمات
             </Link>

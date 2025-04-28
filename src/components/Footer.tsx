@@ -7,15 +7,15 @@ const Footer = () => {
   return (
     <footer className="border-t bg-background">
       <div className="container py-8 md:py-12">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-3">
           {/* Column 1: About */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="relative h-8 w-8">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-blue-500">
+          <div className="space-y-4 md:col-span-2">
+            <div className="flex items-center">
+              {/* <div className="relative h-8 w-8">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-chart-1 to-chart-4 border-2">
                   <span className="text-sm font-bold text-white">ع</span>
                 </div>
-              </div>
+              </div> */}
               <span className="text-xl font-bold">لحظات</span>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -110,121 +110,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase">
-              روابط سريعة
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  الرئيسية
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  الخدمات
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  العروض
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  المقالات
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  المدونة
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  التواصل
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Categories */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase">
-              خدماتنا تشمل
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground  hover:text-primary"
-                >
-                  حجز القاعات
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  تأجير فساتين الزفاف
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  حجز الفنانين
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  التصوير الفوتوغرافي
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  تنسيق الزهور
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  و المزيد !
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Newsletter */}
+          {/* Column 2: Newsletter */}
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase">
               أشترك في نشرتنا
@@ -254,7 +140,7 @@ const Footer = () => {
         <div className="mt-8 border-t pt-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-center text-sm text-muted-foreground">
-               لحظات {new Date().getFullYear()} كل الحقوق محفوظة.
+              لحظات {new Date().getFullYear()} كل الحقوق محفوظة.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
               <Link href="#" className="hover:text-primary">

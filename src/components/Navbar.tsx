@@ -16,12 +16,12 @@ const Navbar = async ({ session }: { session: Session }) => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo & Navigation */}
           <div className="hidden md:flex items-center gap-6 whitespace-nowrap">
-            <Link href="/" className="flex items-center gap-2 z-10">
-              <div className="relative h-8 w-8">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-blue-500">
+            <Link href="/" className="flex items-center  z-10">
+              {/* <div className="relative h-8 w-8">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-chart-1 to-chart-4 border-2 ">
                   <span className="text-sm font-bold text-white">ع</span>
                 </div>
-              </div>
+              </div> */}
               <h3 className="text-lg font-bold md:text-xl">لحظات</h3>
             </Link>
 

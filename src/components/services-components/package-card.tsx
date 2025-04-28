@@ -20,7 +20,7 @@ interface PackageCardProps {
 
 export function PackageCard({ package: pkg }: PackageCardProps) {
   return (
-    <Card className={`h-full flex flex-col pb-6 pt-0 ${pkg.popular ? "border-primary shadow-lg" : ""}`}>
+    <Card className={`h-full flex flex-col pb-6 pt-0 ${pkg.popular ? "border-primary shadow-lg" : ""}`} dir="rtl">
       <div className="relative h-48 w-full">
         <Image src={pkg.image || "/placeholder.svg"} alt={pkg.title} fill className="object-cover rounded-t-lg" />
         {pkg.popular && (

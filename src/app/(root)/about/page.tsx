@@ -4,9 +4,9 @@ import { CheckCircle, Users, Award } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "من نحن - عرسك علينا",
+  title: "من نحن - لحظات",
   description:
-    "تعرف على منصة عرسك علينا وكيف نساعد في تنظيم المناسبات والحفلات",
+    "تعرف على منصة لحظات, وكيف نساعد في تنظيم المناسبات والحفلات",
 };
 
 export default function AboutPage() {

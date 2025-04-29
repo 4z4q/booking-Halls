@@ -20,6 +20,14 @@ import { servicesData } from "@/constants/services-data";
 import { BookingModal } from "@/components/booking-components/booking-model";
 import { CarouselSize } from "@/components/image-carousel";
 
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { id: string };
+// }) {
+//   const { id } = await params;
+// }
+
 export default async function filterFeaturedDetailsPage({
   params,
 }: {

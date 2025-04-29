@@ -13,8 +13,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const metadata: Metadata = {
-  title: "اتصل بنا - TechReview",
-  description: "تواصل مع فريق TechReview للاستفسارات والدعم",
+  title: "اتصل بنا - لحظات",
+  description: "تواصل مع فريق لحظات, للاستفسارات والدعم",
 };
 
 export default function ContactPage() {

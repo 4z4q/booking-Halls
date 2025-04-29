@@ -8,8 +8,8 @@ import { auth } from "../../../../auth";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "My Bookings",
-  description: "View and manage all your bookings",
+  title: "حجوزاتي - لحظات",
+  description: "عرض وإدارة جميع حجوزاتك في مكان واحد",
 };
 
 export default async function MyBookingsPage() {      

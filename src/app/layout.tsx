@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Cairo, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Cairo } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "../../auth";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const IBM = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  weight: ["400", "700"],
-  variable: "--font-ibm",
-});
+// const IBM = IBM_Plex_Sans_Arabic({
+//   subsets: ["arabic"],
+//   weight: ["400", "700"],
+//   variable: "--font-ibm",
+// });
 
 const cairo = Cairo({
   subsets: ["arabic"],

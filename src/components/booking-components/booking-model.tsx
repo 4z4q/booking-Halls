@@ -142,7 +142,7 @@ export function BookingModal({
             <div className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="date">التاريخ</Label>
-                <Popover modal={true} >
+                <Popover modal={true}>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"

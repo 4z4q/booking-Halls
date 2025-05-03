@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import { format } from "date-fns";
-import { ar, arSA } from "date-fns/locale"; // Fixed import - removed 'se'
 import { CalendarIcon, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,11 +19,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Checkmark } from "../currency-transfer";
-import AppCalendr from "./app-calendr";
-import { DayPicker } from "react-day-picker";
+
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cn } from "@/lib/utils";
 import { Calendar } from "../ui/calendar";
+import { format } from "date-fns";
+import { ar, arSA } from "react-day-picker/locale";
 
 const timeSlots = [
   "9:00 صباحاً",

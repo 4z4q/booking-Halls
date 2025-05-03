@@ -13,8 +13,9 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const metadata: Metadata = {
-  title: "اتصل بنا - لحظات",
-  description: "تواصل مع فريق لحظات, للاستفسارات والدعم",
+  title: "تواصل معنا | لحظات - منصة حجوزات المناسبات في اليمن",
+  description:
+    "هل لديك استفسار أو طلب؟ تواصل مع فريق لحظات الآن وسنكون سعداء بمساعدتك في حجوزات القاعات، التصوير، الديكور، وأكثر في إب، اليمن.",
 };
 
 export default function ContactPage() {
@@ -52,8 +53,8 @@ export default function ContactPage() {
                       +967 780 842 038
                     </p>
                   </div>
-                  <div className="h-10 w-10 rounded-full bg-purple-100  items-center md:flex hidden  justify-center mr-4">
-                    <Phone className="h-5 w-5  text-purple-600" />
+                  <div className="h-10 w-10 rounded-full bg-blue-100  items-center md:flex hidden  justify-center mr-4">
+                    <Phone className="h-5 w-5  text-primary " />
                   </div>
                 </div>
 
@@ -61,7 +62,7 @@ export default function ContactPage() {
                   <div className="text-right">
                     <p className="font-medium">البريد الإلكتروني</p>
                     <p className="text-muted-foreground ">
-                      info@techreview.com
+                      mohammedjameelabdo@gmail.com
                     </p>
                   </div>
                   <div className="h-10 w-10 rounded-full bg-blue-100  items-center md:flex hidden justify-center m4-4">
@@ -183,7 +184,7 @@ export default function ContactPage() {
                 <div className="bg-card rounded-xl border p-8 shadow-sm">
                   <div className="flex items-center justify-start mb-6">
                     <h2 className="text-2xl font-bold">الأسئلة الشائعة</h2>
-                    <HelpCircle className="h-6 w-6 mr-2 text-purple-600" />
+                    <HelpCircle className="h-6 w-6 mr-2 text-primary" />
                   </div>
 
                   <Accordion type="single" collapsible className="w-full">

@@ -7,29 +7,19 @@ export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       {/* Header */}
-      <header className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative h-8 w-8">
-              <div className="absolute h-8 w-8 rounded-full bg-purple-600"></div>
-              <div className="absolute h-6 w-6 translate-x-1 translate-y-1 rounded-full bg-blue-500"></div>
-            </div>
-            <span className="text-xl font-bold">عرسك علينا</span>
-          </Link>
-        </div>
-      </header>
+ 
 
       {/* Main Content */}
       <main className="container flex flex-1 flex-col items-center justify-center py-12">
         <div className="relative mb-8 h-64 w-64 md:h-80 md:w-80">
-          <div className="absolute inset-0 animate-pulse rounded-full bg-purple-600/20"></div>
-          <div className="absolute inset-4 animate-pulse rounded-full bg-purple-600/30 animation-delay-150"></div>
-          <div className="absolute inset-8 animate-pulse rounded-full bg-purple-600/40 animation-delay-300"></div>
-          <div className="absolute inset-12 animate-pulse rounded-full bg-purple-600/50 animation-delay-450"></div>
-          <div className="absolute inset-16 animate-pulse rounded-full bg-purple-600/60 animation-delay-600"></div>
+          <div className="absolute inset-0 animate-pulse rounded-full bg-primary/20"></div>
+          <div className="absolute inset-4 animate-pulse rounded-full bg-primary/30 animation-delay-150"></div>
+          <div className="absolute inset-8 animate-pulse rounded-full bg-primary/40 animation-delay-300"></div>
+          <div className="absolute inset-12 animate-pulse rounded-full bg-primary/50 animation-delay-450"></div>
+          <div className="absolute inset-16 animate-pulse rounded-full bg-primary/60 animation-delay-600"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <span className="block text-7xl font-bold text-purple-600 md:text-8xl">
+              <span className="block text-7xl font-bold text-white md:text-8xl">
                 404
               </span>
               <span className="mt-2 block text-xl font-semibold text-white">
@@ -127,7 +117,7 @@ export default function NotFound() {
         <div className="container">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-center text-sm text-muted-foreground">
-              عرسك علينا . جميع الحقوق محفوظة.  © {new Date().getFullYear()}
+              لحظات  . جميع الحقوق محفوظة.  © {new Date().getFullYear()}
             </p>
             <div className="flex gap-4">
               <Link

@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Cairo } from "next/font/google";
+import { Cairo, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "../../auth";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import { ThemeProvider } from "@/components/theme-provider";
 
-// const IBM = IBM_Plex_Sans_Arabic({
-//   subsets: ["arabic"],
-//   weight: ["400", "700"],
-//   variable: "--font-ibm",
-// });
+const IBM = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-ibm",
+});
 
 const cairo = Cairo({
   subsets: ["arabic"],
@@ -21,46 +21,53 @@ const cairo = Cairo({
 
 export const metadata: Metadata = {
   title: {
-    default: "لحظات | احجز أفضل قاعات وخدمات المناسبات في إب، اليمن",
-    template: "%s | لحظات - حجوزات قاعات ومناسبات في اليمن",
+    default: "لحظات | احجز كل خدمات مناسبتك في إب، اليمن",
+    template: "%s | لحظات - حجوزات مناسبات وقاعات في اليمن",
   },
   description:
-    "لحظات هي المنصة الأولى لحجوزات قاعات الأفراح والمناسبات في محافظة إب، اليمن. احجز الآن أفضل القاعات، خدمات التصوير، الدي جي، الديكور، تنظيم الحفلات والمزيد بكل سهولة واحترافية.",
+    "منصة لحظات هي وجهتك الأولى لحجز جميع خدمات المناسبات في إب، اليمن. احجز قاعات أفراح، مصورين محترفين، دي جي، ديكور، طباعة دعوات، زفات وفنانين، وكل ما تحتاجه لتنظيم مناسبتك المثالية.",
   keywords: [
     "لحظات",
     "إب",
+    "اب",
     "اليمن",
-    "حجوزات اليمن",
-    "حجز قاعات",
-    "قاعات أفراح اليمن",
-    "قاعات أفراح في إب",
-    "قاعة زفاف إب",
-    "قاعة حفلات",
-    "حجوزات أونلاين",
-    "منصة حجز مناسبات",
-    "تصوير أعراس إب",
-    "تصوير حفلات",
-    "تنظيم مناسبات اليمن",
-    "تنظيم حفلات إب",
+    "حجوزات مناسبات",
+    "حجز قاعات أفراح",
+    "قاعات مناسبات في إب",
+    "حجز قاعات في اب",
+    "حجوزات في إب",
+    "تنظيم حفلات في اليمن",
+    "زفات",
+    "فنانين حفلات",
+    "مصور حفلات",
+    "تصوير مناسبات",
+    "تصوير أعراس اليمن",
+    "طباعة كروت زفاف",
+    "كوشة زفاف",
     "ديكور حفلات",
-    "خدمات أفراح اليمن",
-    "خدمات مناسبات في إب",
-    "قاعات مناسبات اليمن",
-    "قاعة ملكية في إب",
-    "قاعات فخمة اليمن",
+    "تنسيق أعراس",
+    "خدمات زواج اليمن",
+    "قاعة أفراح إب",
+    "دي جي مناسبات",
+    "فستان عروس",
+    "ملابس أفراح",
+    "إيجار بدلات",
+    "تنظيم حفلات",
     "زواج إب",
-    "أعراس اليمن",
-    "دي جي حفلات",
-    "كوشة زفاف إب",
+    "أفراح اليمن",
+    "قاعة فخمة إب",
+    "حفلات زفاف",
+    "مناسبات خاصة",
+    "منصة حجز أفراح",
   ],
   metadataBase: new URL("https://booking-halls.vercel.app"),
   alternates: {
     canonical: "https://booking-halls.vercel.app",
   },
   openGraph: {
-    title: "لحظات | احجز قاعتك وخدمات مناسبتك في إب، اليمن",
+    title: "لحظات | احجز كل ما تحتاجه لمناسبتك في إب، اليمن",
     description:
-      "استكشف أفضل قاعات الأفراح وخدمات المناسبات في إب، اليمن عبر منصة لحظات. حجوزات سهلة، خيارات متعددة، وتنظيم احترافي لمناسبتك الخاصة.",
+      "لحظات تقدم لك تجربة متكاملة لحجز قاعات وخدمات مناسبات في إب. قاعات، تصوير، ديكور، طباعة، فنانين، زفات والمزيد في مكان واحد.",
     url: "https://booking-halls.vercel.app",
     siteName: "لحظات",
     locale: "ar_YE",
@@ -78,7 +85,7 @@ export default async function RootLayout({
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <SessionProvider session={session}>
-        <body className={`${cairo.className}`}>
+        <body className={`!${cairo.className} ${IBM.className}`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"

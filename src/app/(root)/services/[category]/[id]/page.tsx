@@ -19,15 +19,35 @@ import { servicesData } from "@/constants/services-data";
 
 import { BookingModal } from "@/components/booking-components/booking-model";
 import { CarouselSize } from "@/components/image-carousel";
+import { getCategoryNameInArabic } from "@/utils/utils";
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { id: string };
-// }) {
-//   const { id } = await params;
-// }
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string; id: string };
+}) {
+  // Extract both parameters
+  const { category, id } = await params;
 
+  // Find the specific service by ID and category
+  const service = servicesData.find(
+    (service) => service.id === Number(id) && service.type === category
+  );
+
+  // If no service matches both the category and ID, show 404
+  if (!service) {
+    notFound();
+  }
+
+  // Get the Arabic category name
+
+  const arabicCategoryName = getCategoryNameInArabic(category);
+
+  return {
+    title: `${service.name} | ${arabicCategoryName} - خدمات المناسبات`,
+    description: `تعرف على تفاصيل خدمة ${service.name} ضمن تصنيف ${arabicCategoryName} لمناسبتك الخاصة.`,
+  };
+}
 export default async function filterFeaturedDetailsPage({
   params,
 }: {
@@ -47,22 +67,6 @@ export default async function filterFeaturedDetailsPage({
   }
 
   // Get the Arabic category name
-  const getCategoryNameInArabic = (category: string) => {
-    switch (category) {
-      case "halls":
-        return "القاعات";
-      case "decor":
-        return "الديكور";
-      case "artists":
-        return "الفنانين";
-      case "clothing":
-        return "الأزياء";
-      case "photography":
-        return "التصوير";
-      default:
-        return category;
-    }
-  };
 
   const arabicCategoryName = getCategoryNameInArabic(category);
 
@@ -76,7 +80,7 @@ export default async function filterFeaturedDetailsPage({
           className="inline-flex items-center mb-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="ml-2 h-4 w-4" />
-          العودة إلى {arabicCategoryName}
+          {arabicCategoryName} العودة إلى 
         </Link>
 
         {/* عنوان القاعة */}

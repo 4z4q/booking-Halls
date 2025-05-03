@@ -20,7 +20,7 @@ export default function AboutPage() {
             من نحن
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto">
-            منصة عرسك علينا هي وجهتك الأولى لتنظيم المناسبات والحفلات بكل سهولة
+            منصة لحظات هي وجهتك الأولى لتنظيم المناسبات والحفلات بكل سهولة
             وإتقان
           </p>
         </div>
@@ -48,7 +48,7 @@ export default function AboutPage() {
           <div className="relative h-[250px] md:h-[400px] rounded-xl overflow-hidden order-1 md:order-2">
             <Image
               src="/Untitled-1.jpg"
-              alt="قصة عرسك علينا"
+              alt="قصة لحظات ا"
               fill
               className="object-cover"
             />

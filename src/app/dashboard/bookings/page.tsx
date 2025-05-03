@@ -5,23 +5,46 @@ import {
 import { DataTable } from "@/components/dashboard-components/data-table/data-table";
 import { TasksPrimaryButtons } from "@/components/dashboard-components/tasks-primary-buttons";
 
+
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
   return [
     {
-      id: "BKG-001",
-      customer: "محمد أحمد",
-      service: "قاعة الزفاف الملكية",
+      id: "BKG-005",
+      customer: "عبدالله محمد",
+      service: "قاعة الورود",
+
       eventDate: new Date(),
-      status: "pending",
-      paymentMethod: "بطاقة ائتمان",
-      amount: 500,
+      status: "confirmed",
+      paymentMethod: "تحويل بنكي",
+      amount: 600,
       email: "skodr@gmail.com",
     },
-    // ...
+    {
+      id: "BKG-006",
+      customer: "نورة سعيد",
+      service: "تصميم ديكور الزفاف",
+
+      eventDate: new Date(),
+      status: "pending",
+      paymentMethod: "دفع إلكتروني",
+      amount: 450,
+      email: "skodr@gmail.com",
+    },
+
+    {
+      id: "BKG-010",
+      customer: "جميلة خالد",
+      service: "قاعة السعادة",
+
+      eventDate: new Date(),
+      status: "confirmed",
+      paymentMethod: "بطاقة ائتمان",
+      amount: 700,
+      email: "skodr@gmail.com",
+    },
   ];
 }
-
 const page = async () => {
   const data = await getData();
   return (
@@ -41,4 +64,7 @@ const page = async () => {
     </div>
   );
 };
+
 export default page;
+
+

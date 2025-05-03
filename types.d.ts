@@ -48,4 +48,3 @@ interface Booking {
   status: "pending" | "confirmed" | "completed" | "cancelled";
   image: string;
 }
-

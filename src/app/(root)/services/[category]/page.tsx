@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import { allowedCategories, services } from "@/constants/services-data";
 import { ProductsFilter } from "@/components/products-filter";
+import { getCategoryNameInArabic } from "@/utils/utils";
 export async function generateMetadata({
   params,
 }: {
@@ -10,12 +11,11 @@ export async function generateMetadata({
   const { category } = await params;
 
   // Format the category name for display (capitalize first letter)
-  const formattedCategory =
-    category.charAt(0).toUpperCase() + category.slice(1);
+  const arabicCategoryName = getCategoryNameInArabic(category);
 
   return {
-    title: `${formattedCategory} - خدمات المناسبات`,
-    description: `تصفح خدمات ${formattedCategory} لمناسباتك الخاصة`,
+    title: `${arabicCategoryName} - خدمات المناسبات`,
+    description: `تصفح خدمات ${arabicCategoryName} لمناسباتك الخاصة`,
   };
 }
 
@@ -47,22 +47,6 @@ export default async function HallsPage({
   }
 
   // Get the Arabic category name
-  const getCategoryNameInArabic = (category: string) => {
-    switch (category) {
-      case "halls":
-        return "القاعات";
-      case "decor":
-        return "الديكور";
-      case "artists":
-        return "الفنانين";
-      case "clothing":
-        return "الأزياء";
-      case "photography":
-        return "التصوير";
-      default:
-        return category;
-    }
-  };
 
   const arabicCategoryName = getCategoryNameInArabic(category);
 

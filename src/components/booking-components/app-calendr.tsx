@@ -3,12 +3,14 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { format } from "date-fns";
 import { Calendar } from "../ui/calendar";
-import { ar } from "date-fns/locale";
-import { CalendarIcon } from "lucide-react"; // استيراد الأيقونة
+import { ar, arSA } from "date-fns/locale";
+import { CalendarIcon } from "lucide-react";
+import { DayPicker } from "react-day-picker";
 
 const AppCalendr = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
+  const [selected, setSelected] = useState<Date>();
 
   return (
     <>
@@ -24,7 +26,7 @@ const AppCalendr = () => {
       </Button>
 
       {showCalendar && (
-        <div className="relative mt-2 duration-300 transition-all ease-in-out">
+        <div className="relative mt-2 duration-300 transition-all ease-in-out ">
           <div
             className={`absolute ${
               showCalendar
@@ -32,7 +34,19 @@ const AppCalendr = () => {
                 : "-translate-y-full"
             }`}
           >
-            <Calendar
+            <DayPicker locale={arSA} dir="rtl" />;
+            {/* <DayPicker
+              animate
+              mode="single"
+              selected={selected}
+              onSelect={setSelected}
+              footer={
+                selected
+                  ? `Selected: ${selected.toLocaleDateString()}`
+                  : "Pick a day."
+              }
+            /> */}
+            {/* <Calendar
               mode="single"
               selected={date}
               onSelect={(selectedDate) => {
@@ -40,7 +54,7 @@ const AppCalendr = () => {
                 setShowCalendar(false);
               }}
               className="border rounded-md shadow-lg bg-white p-2 flex justify-center items-center"
-            />
+            /> */}
           </div>
         </div>
       )}

@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { format } from "date-fns";
-import { ar } from "date-fns/locale"; // Fixed import - removed 'se'
-import {  CalendarIcon, Clock, Loader2 } from "lucide-react";
+import { ar, arSA } from "date-fns/locale"; // Fixed import - removed 'se'
+import { CalendarIcon, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,6 +22,10 @@ import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Checkmark } from "../currency-transfer";
 import AppCalendr from "./app-calendr";
+import { DayPicker } from "react-day-picker";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { cn } from "@/lib/utils";
+import { Calendar } from "../ui/calendar";
 
 const timeSlots = [
   "9:00 صباحاً",
@@ -122,8 +126,6 @@ export function BookingModal({
     }
   };
 
-
-
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -140,7 +142,32 @@ export function BookingModal({
             <div className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="date">التاريخ</Label>
-                <AppCalendr />
+                <Popover modal={true} >
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-end text-right font-normal",
+                        !date && "text-muted-foreground"
+                      )}
+                    >
+                      {date
+                        ? format(date, "PPP", { locale: ar })
+                        : "اختر تاريخ"}
+                      <CalendarIcon className="ml-2 h-4 w-4" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="center">
+                    <Calendar
+                      locale={arSA}
+                      dir="rtl"
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      className="rounded-md border shadow"
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
 
               <div className="space-y-2">
@@ -160,25 +187,6 @@ export function BookingModal({
                 </div>
               </div>
             </div>
-            {/* <div className="space-y-4 py-4">
-              <div className="space-y-2">
-                <Label htmlFor="date">التاريخ</Label>
-
-                <div className="relative mb-4">
-                  <input
-                    type="date"
-                    className="peer w-full appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 pr-10 text-gray-700 shadow-sm focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    value={date ? format(date, "PPP") : ""}
-                    onChange={handleDateChange}
-                    min={format(today, "PPP")}
-                    max={format(maxDate, "PPP")}
-                  />
-                  <i className="fas fa-calendar-alt absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 peer-focus:text-purple-500 pointer-events-none"></i>
-                </div>
-              </div>
-
-              
-            </div> */}
 
             <DialogFooter className="flex flex-row-reverse sm:justify-between">
               <Button onClick={() => setStep(2)} disabled={!date || !timeSlot}>

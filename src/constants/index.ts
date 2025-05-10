@@ -155,4 +155,3 @@ export const FIELD_TYPES_VENDOR = {
   serviceType: "text",
   documentUrl: "url",
 };
-

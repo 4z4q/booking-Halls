@@ -8,6 +8,16 @@ import { hash } from "bcryptjs";
 
 const SALT_ROUNDS = 10;
 
+/**
+ * Signs in a user with their credentials (email and password).
+ *
+ * @param {Object} params - The credentials for the user.
+ * @param {string} params.email - The user's email.
+ * @param {string} params.password - The user's password.
+ * @param {string} [params.callbackUrl] - Optional callback URL to redirect to after login.
+ *
+ * @returns {Promise<{ success: boolean; error?: string }>} The result of the sign-in attempt.
+ */
 export const signInWithCredentials = async (
   params: Pick<AuthCredentials, "email" | "password"> & { callbackUrl?: string }
 ) => {
@@ -23,26 +33,26 @@ export const signInWithCredentials = async (
 
     if (result?.error) return { success: false, error: result.error };
 
-    // console.log("CallbackUrl in signInWithCredentials:", callbackUrl);
-    // console.log("Result from signIn:", result);
-
-    // if (result?.url) {
-    //   redirect(result.url);
-    // }
-
     return { success: true };
   } catch (error: Error | unknown) {
     console.log(
       `Error creating user: ${
         error instanceof Error
           ? error.message
-          : "خطاء غير متوقع يرجئ اعاده المحاوله"
+          : "Unexpected error, please try again"
       }`
     );
   }
-  return { success: false, error: "خطاء غير متوقع يرجئ اعاده المحاوله" };
+  return { success: false, error: "Unexpected error, please try again" };
 };
 
+/**
+ * Registers a new user by inserting their details into the database and signing them in.
+ *
+ * @param {AuthCredentials} params - The user's credentials including first name, last name, email, and password.
+ *
+ * @returns {Promise<{ success: boolean; error?: string }>} The result of the sign-up attempt.
+ */
 export const signUp = async ({
   firstName,
   lastName,
@@ -58,7 +68,7 @@ export const signUp = async ({
     if (existingUser.length) {
       return {
         success: false,
-        error: "البريد الالكتروني مستخدم من قبل",
+        error: "Email is already in use",
       };
     }
 
@@ -71,7 +81,6 @@ export const signUp = async ({
       password: hashPassword,
     });
 
-    // This will be called after the user is created and redirects to the home page page
     await signInWithCredentials({ email, password });
 
     return { success: true };
@@ -83,11 +92,16 @@ export const signUp = async ({
     );
     return {
       success: false,
-      error: "فشل الاتصال بالخادم، حاول مرة أخرى لاحقاً",
+      error: "Server connection failed, please try again later",
     };
   }
 };
 
+/**
+ * Logs out the currently authenticated user.
+ *
+ * @returns {Promise<void>} A promise indicating the completion of the sign-out operation.
+ */
 export const logoutUser = async () => {
   await signOut();
 };

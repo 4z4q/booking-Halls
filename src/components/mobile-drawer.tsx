@@ -14,7 +14,7 @@ import { Menu, ChevronLeft, X, LogOut } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "./shared/mode-toggle";
 import { logoutUser } from "@/utils/auth";
 import { useRouter } from "next/navigation";
 

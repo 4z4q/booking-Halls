@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ServiceDetailsLoading() {
   return (
-    <div className="min-h-screen" dir="rtl">
+    <div className="min-h-screen bg-white" dir="rtl">
       <div className="container py-6 md:py-8">
         {/* Back Button */}
         <Skeleton className="h-6 w-24 mb-6" />

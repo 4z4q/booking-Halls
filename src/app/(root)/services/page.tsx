@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { SearchFilter } from "../../../components/services-components/search-filter";
-import { PackageCard } from "../../../components/services-components/package-card";
-import { ServiceCard } from "../../../components/services-components/service-card";
-import { ServiceTypeLink } from "../../../components/services-components/service-type-link";
+import { SearchFilter } from "../../../components/website/services-component/filters/search-filter";
+import { PackageCard } from "../../../components/website/services-component/package-card";
+import { ServiceCard } from "../../../components/website/services-component/service-card";
+import { ServiceTypeLink } from "../../../components/website/services-component/service-type-link";
 import {
   Diamond,
   Flame,
@@ -116,6 +116,7 @@ export default function ServicesPage() {
   ];
 
   const filteredServices = services.filter((service) => {
+    console.log("this", selectedFilter);
     const matchesSearch =
       service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       service.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -174,7 +175,7 @@ export default function ServicesPage() {
               onMouseLeave={plugin.reset}
               dir="ltr"
             >
-              <CarouselContent >
+              <CarouselContent>
                 {packages.map((pkg) => (
                   <CarouselItem key={pkg.id} className="basis-[100%]">
                     <PackageCard package={pkg} />

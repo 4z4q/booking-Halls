@@ -5,12 +5,32 @@ import NextAuth, { User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 
+/**
+ * Authentication handler configuration using NextAuth for user authentication.
+ *
+ * @module Auth
+ * @description This handler provides authentication functionality using credentials (email and password).
+ * It includes user sign-in, sign-out, JWT session management, and custom callback handling.
+ */
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
+    /**
+     * Session strategy using JWT for storing the session information.
+     */
     strategy: "jwt",
   },
   providers: [
     CredentialsProvider({
+      /**
+       * Authorizes the user based on the provided credentials (email and password).
+       *
+       * @param {Object} credentials - The user's credentials for authentication.
+       * @param {string} credentials.email - The user's email address.
+       * @param {string} credentials.password - The user's password.
+       * @returns {Promise<User | null>} The user object if authentication succeeds, or null if it fails.
+       *
+       * @throws {Error} Will throw an error if there's an issue during the authorization process.
+       */
       async authorize(credentials) {
         console.log("credentials", credentials);
 
@@ -58,9 +78,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.AUTH_SECRET,
 
   pages: {
+    /**
+     * Custom sign-in page.
+     */
     signIn: "/sign-in",
   },
+
   callbacks: {
+    /**
+     * JWT callback to persist user data in the JWT token.
+     *
+     * @param {Object} param - The parameter containing JWT and user data.
+     * @param {Object} param.token - The JWT token object.
+     * @param {User} param.user - The authenticated user object.
+     * @returns {Object} The updated JWT token.
+     */
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
@@ -72,6 +104,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
 
+    /**
+     * Session callback to map JWT token data to session object.
+     *
+     * @param {Object} param - The parameter containing session and token data.
+     * @param {Object} param.session - The session object.
+     * @param {Object} param.token - The JWT token.
+     * @returns {Object} The updated session object with user data.
+     */
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;

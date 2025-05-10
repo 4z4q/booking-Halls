@@ -1,6 +1,6 @@
 import "../globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 import { auth } from "../../../auth";
 
 export default async function RootLayout({

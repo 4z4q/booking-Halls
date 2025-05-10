@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 
 import { allowedCategories, services } from "@/constants/services-data";
-import { ProductsFilter } from "@/components/products-filter";
 import { getCategoryNameInArabic } from "@/utils/utils";
+import { ProductsFilter } from "@/components/website/services-component/products-filter";
 export async function generateMetadata({
   params,
 }: {

@@ -48,3 +48,43 @@ interface Booking {
   status: "pending" | "confirmed" | "completed" | "cancelled";
   image: string;
 }
+
+interface ServicesType {
+  id: number;
+  name: string;
+  location: string;
+  price: number;
+  capacity: number;
+  rating: number;
+  type: string;
+  image: string;
+  description: string;
+}
+
+interface ServiceEditFormProps {
+  service: {
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    price: number;
+    pricingType: string;
+    city: string;
+    address: string;
+    images: string[];
+    status: string;
+  };
+}
+
+interface serviceData {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  pricingType: string;
+  city: string;
+  address: string;
+  images: string[];
+  status: string;
+};

@@ -1,10 +1,8 @@
-import {
-  columns,
-  Payment,
-} from "@/components/dashboard-components/data-table/columns";
-import { DataTable } from "@/components/dashboard-components/data-table/data-table";
+import { columns } from "@/components/dashboard-components/booking-component/columns";
+import { DashDialogs } from "@/components/dashboard-components/booking-component/dash-dialogs";
+import { DataTable } from "@/components/dashboard-components/shared/data-table";
 import { TasksPrimaryButtons } from "@/components/dashboard-components/tasks-primary-buttons";
-
+import { Payment } from "@/lib/validation";
 
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
@@ -58,13 +56,12 @@ const page = async () => {
         </div>
         <TasksPrimaryButtons />
       </div>
-      <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12">
-        <DataTable data={data} columns={columns} />
+      <div className="-mx-4 flex-1 overflow-auto  py-1 lg:flex-row lg:space-y-0 lg:space-x-12">
+        <DataTable data={data} columns={columns} placeholder="email" />
       </div>
+      <DashDialogs />
     </div>
   );
 };
 
 export default page;
-
-

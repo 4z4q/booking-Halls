@@ -6,9 +6,6 @@ import { Search } from "lucide-react";
 export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      {/* Header */}
- 
-
       {/* Main Content */}
       <main className="container flex flex-1 flex-col items-center justify-center py-12">
         <div className="relative mb-8 h-64 w-64 md:h-80 md:w-80">
@@ -117,7 +114,7 @@ export default function NotFound() {
         <div className="container">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-center text-sm text-muted-foreground">
-              لحظات  . جميع الحقوق محفوظة.  © {new Date().getFullYear()}
+              لحظات . جميع الحقوق محفوظة. © {new Date().getFullYear()}
             </p>
             <div className="flex gap-4">
               <Link

@@ -13,11 +13,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { AccountDetailsCard } from "@/components/account-components/account-details-card";
-import { PersonalInfoCard } from "@/components/account-components/personal-info-card";
+
 import { auth } from "../../../../auth";
 import { redirect } from "next/navigation";
 import { getUserByEmail } from "@/utils/utils";
+import { PersonalInfoCard } from "@/components/website/account-component/personal-info-card";
+import { AccountDetailsCard } from "@/components/website/account-component/account-details-card";
 
 export const metadata: Metadata = {
   title: "معلومات الحساب",

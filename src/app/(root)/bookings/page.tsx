@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookingCard } from "@/components/booking-components/booking-card";
+import { BookingCard } from "@/components/website/booking-component/booking-card";
 import { bookings } from "@/constants/services-data";
 import { auth } from "../../../../auth";
 import { redirect } from "next/navigation";
@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   description: "عرض وإدارة جميع حجوزاتك في مكان واحد",
 };
 
-export default async function MyBookingsPage() {      
+export default async function MyBookingsPage() {
   const session = await auth();
-  if(!session) redirect("/sign-in");
+  if (!session) redirect("/sign-in");
   return (
     <div className="container mx-auto py-8 px-4 md:px-6">
       <div className="flex flex-col gap-2 mb-8">

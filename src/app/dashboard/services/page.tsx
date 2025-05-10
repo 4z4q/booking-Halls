@@ -1,97 +1,41 @@
-import { columns } from "@/components/dashboard-components/data-table/columns";
-import { DashDialogs } from "@/components/dashboard-components/data-table/dash-dialogs";
-import { DataTable } from "@/components/dashboard-components/data-table/data-table";
+import { columns } from "@/components/dashboard-components/services-component/columns";
+import { DataTable } from "@/components/dashboard-components/shared/data-table";
 import { TasksPrimaryButtons } from "@/components/dashboard-components/tasks-primary-buttons";
-import { Payment } from "@/lib/validation";
 
-async function getData(): Promise<Payment[]> {
+async function getData(): Promise<ServicesType[]> {
   // Fetch data from your API here.
   return [
     {
-      id: "BKG-005",
-      customer: "عبدالله محمد",
-      service: "قاعة الورود",
-
-      eventDate: new Date(),
-      status: "confirmed",
-      paymentMethod: "تحويل بنكي",
-      amount: 600,
-      email: "skodr@gmail.com",
-    },
-    {
-      id: "BKG-006",
-      customer: "نورة سعيد",
-      service: "تصميم ديكور الزفاف",
-
-      eventDate: new Date(),
-      status: "pending",
-      paymentMethod: "دفع إلكتروني",
-      amount: 450,
-      email: "skodr@gmail.com",
-    },
-    {
-      id: "BKG-007",
-      customer: "علي فهد",
-      service: "خدمة الفيديو والدرون",
-
-      eventDate: new Date(),
-      status: "confirmed",
-      paymentMethod: "بطاقة ائتمان",
-      amount: 800,
-      email: "skodr@gmail.com",
-    },
-    {
-      id: "BKG-008",
-      customer: "منى تركي",
-      service: "قاعة اللؤلؤة",
-
-      eventDate: new Date(),
-      status: "cancelled",
-      paymentMethod: "تحويل بنكي",
-      amount: 550,
-      email: "skodr@gmail.com",
-    },
-    {
-      id: "BKG-009",
-      customer: "فيصل ناصر",
-      service: "فرقة موسيقية شعبية",
-
-      eventDate: new Date(),
-      status: "pending",
-      paymentMethod: "دفع إلكتروني",
-      amount: 380,
-      email: "skodr@gmail.com",
-    },
-    {
-      id: "BKG-010",
-      customer: "جميلة خالد",
-      service: "قاعة السعادة",
-
-      eventDate: new Date(),
-      status: "confirmed",
-      paymentMethod: "بطاقة ائتمان",
-      amount: 700,
-      email: "skodr@gmail.com",
+      id: 1,
+      name: "قاعة الفخامة",
+      location: "الرياض",
+      price: 5000,
+      capacity: 300,
+      rating: 4.5,
+      type: "halls",
+      image: "/pexels-bertellifotografia-17023018.jpg",
+      description: "قاعة فاخرة للمناسبات الكبيرة",
     },
   ];
 }
 const page = async () => {
   const data = await getData();
   return (
-    <div className="container w-full h-full py-6 ">
+    <div className="container w-full h-full py-6 overflow-hidden ">
       <div className="mb-2 flex flex-wrap items-center justify-between space-y-2 gap-x-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">حجوزات</h2>
+          <h2 className="text-2xl font-bold tracking-tight ">خدماتي </h2>
           <p className="text-muted-foreground">
-            هنا لديك قائمة جميع الحجوزات الخاصة بك
+            أضف خدماتك وابدأ في جذب العملاء! هنا يمكنك إدارة جميع خدماتك بكل
+            مرونة وسهولة.
           </p>
         </div>
         <TasksPrimaryButtons />
       </div>
-      <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12">
-        <DataTable data={data} columns={columns} />
+
+      <div className="-mx-4 flex-1 overflow-auto py-1 lg:flex-row lg:space-y-0 lg:space-x-12">
+        <DataTable data={data} columns={columns} placeholder="name" />
       </div>
-      <DashDialogs />
     </div>
   );
 };

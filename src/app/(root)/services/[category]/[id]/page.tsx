@@ -17,8 +17,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { servicesData } from "@/constants/services-data";
 
-import { BookingModal } from "@/components/booking-components/booking-model";
-import { CarouselSize } from "@/components/image-carousel";
+import { BookingModal } from "@/components/website/booking-component/booking-model";
+import { CarouselSize } from "@/components/shared/image-carousel";
 import { getCategoryNameInArabic } from "@/utils/utils";
 
 export async function generateMetadata({
@@ -79,8 +79,8 @@ export default async function filterFeaturedDetailsPage({
           href={`/services/${category}`}
           className="inline-flex items-center mb-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
         >
-          <ArrowLeft className="ml-2 h-4 w-4" />
-          {arabicCategoryName} العودة إلى 
+          العودة إلى {arabicCategoryName}
+          <ArrowLeft className="mr-2 h-4 w-4" />
         </Link>
 
         {/* عنوان القاعة */}
